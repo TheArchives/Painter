@@ -1,0 +1,22 @@
+# Paint tool - the item to use
+# See here for names: http://jd.bukkit.org/dev/apidocs/org/bukkit/Material.html
+# Comment out this entry to disable the wool/clay paint tool
+paint_tool: WOOD_SWORD
+
+# This can be coreprotect, logblock or prism
+# See the plugin documentation for more information on how this works
+# Comment out this entry to disable block logging
+logger: logblock
+
+# The rest of this file contains various message strings for you to customize.
+# You can't leave any of these out! Make sure they're all here!
+# You may also use various tokens in the messages, which will be listed in the comments below.
+messages:
+    # Tokens: {PERMISSION}
+    replace_perm_lost: "&dCMP &5\u00BB&6 Replace mode disabled, your access to it has been &crevoked"
+    replace_mode_enable: "&dCMP &5\u00BB&6Replace mode enabled, you are now replacing blocks"
+    replace_mode_disable: "&dCMP &5\u00BB&6Replace mode disabled, you are no longer replacing blocks"
+
+    command_player_only: "&dCMP &5\u00BB&6This command can only be run by a player"
+    command_replace_no_permission: "&dCMP &5\u00BB&6You do not have permission to toggle replace mode"
+    command_paint_tool_no_permission: "&dCMP &5\u00BB&6You do not have permission to use the paint tool"
