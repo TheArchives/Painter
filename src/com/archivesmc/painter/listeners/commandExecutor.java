@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 public class commandExecutor implements CommandExecutor {
@@ -18,20 +19,35 @@ public class commandExecutor implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (command.getLabel().equalsIgnoreCase("painter")) {
             if (!(commandSender instanceof Player)) {
-                this.plugin.sendMessage(commandSender, "command_player_only", null);
+                HashMap<String, String> args = new HashMap<>();
+                args.put("name", commandSender.getName());
+
+                this.plugin.sendMessage(commandSender, "command_player_only", args);
             } else {
                 UUID id = ((Player) commandSender).getUniqueId();
                 if (strings.length < 1) {
                     if (this.plugin.permissions.has(commandSender, "painter.replace")) {
                         if (this.plugin.painters.contains(id)) {
                             this.plugin.painters.remove(id);
-                            this.plugin.sendMessage(commandSender, "replace_mode_disable", null);
+
+                            HashMap<String, String> args = new HashMap<>();
+                            args.put("name", commandSender.getName());
+
+                            this.plugin.sendMessage(commandSender, "replace_mode_disable", args);
                         } else {
                             this.plugin.painters.add(id);
-                            this.plugin.sendMessage(commandSender, "replace_mode_enable", null);
+
+                            HashMap<String, String> args = new HashMap<>();
+                            args.put("name", commandSender.getName());
+
+                            this.plugin.sendMessage(commandSender, "replace_mode_enable", args);
                         }
                     } else {
-                        this.plugin.sendMessage(commandSender, "command_replace_no_permission", null);
+                        HashMap<String, String> args = new HashMap<>();
+                        args.put("permission", "painter.replace");
+                        args.put("name", commandSender.getName());
+
+                        this.plugin.sendMessage(commandSender, "command_replace_no_permission", args);
                     }
                 } else {
                     // TODO: Paint tool

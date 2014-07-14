@@ -33,6 +33,7 @@ public class blockBreakListener implements Listener {
                     this.plugin.painters.remove(player.getUniqueId());
                     HashMap<String, String> args = new HashMap<>();
                     args.put("permission", "painter.replace");
+                    args.put("name", player.getName());
 
                     this.plugin.sendMessage(player, "replace_perm_lost", args);
                     return;
