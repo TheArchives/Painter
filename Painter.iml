@@ -11,7 +11,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="bukkit-1.7.9-R0.2" level="application" />
+    <orderEntry type="library" name="Bukkit and plugins" level="application" />
   </component>
 </module>
 
