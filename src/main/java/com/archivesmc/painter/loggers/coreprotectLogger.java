@@ -10,12 +10,12 @@ import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-public class coreprotectLogger implements Logger {
+public class CoreprotectLogger implements BlockLogger {
 
     private Painter plugin;
     private CoreProtectAPI api;
 
-    public coreprotectLogger(Painter plugin) {
+    public CoreprotectLogger(Painter plugin) {
         this.plugin = plugin;
     }
 

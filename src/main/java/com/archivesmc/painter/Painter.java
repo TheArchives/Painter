@@ -1,11 +1,11 @@
 package com.archivesmc.painter;
 
-import com.archivesmc.painter.listeners.blockBreakListener;
-import com.archivesmc.painter.listeners.commandExecutor;
-import com.archivesmc.painter.loggers.Logger;
-import com.archivesmc.painter.loggers.coreprotectLogger;
-import com.archivesmc.painter.loggers.logblockLogger;
-import com.archivesmc.painter.loggers.prismLogger;
+import com.archivesmc.painter.listeners.BlockBreakListener;
+import com.archivesmc.painter.listeners.CommandRunner;
+import com.archivesmc.painter.loggers.BlockLogger;
+import com.archivesmc.painter.loggers.CoreprotectLogger;
+import com.archivesmc.painter.loggers.LogblockLogger;
+import com.archivesmc.painter.loggers.PrismLogger;
 
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Material;
@@ -16,27 +16,25 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.UUID;
+import java.util.*;
 
 import static org.bukkit.ChatColor.translateAlternateColorCodes;
 
 public class Painter extends JavaPlugin {
 
     Material tool;
-    String tool_string;
+    String toolString;
 
-    Logger logger;
-    String logger_string;
+    BlockLogger blockLogger;
+    String loggerString;
 
-    boolean use_logger = false;
-    boolean use_tool = false;
+    boolean useLogger = false;
+    boolean useTool = false;
 
-    public HashSet<UUID> painters;
+    public Set<UUID> painters;
 
-    private blockBreakListener breakListener;
-    private commandExecutor commands;
+    private BlockBreakListener breakListener;
+    private CommandRunner commands;
 
     public Permission permissions;
 
@@ -50,26 +48,27 @@ public class Painter extends JavaPlugin {
         this.painters = new HashSet<>();
 
         // First, let's start with the paint tool material
-        this.tool_string = this.getConfig().getString("paint_tool", null);
+        this.toolString = this.getConfig().getString("paint_tool", null);
 
-        if (this.tool_string != null) { // Returns null if the entry doesn't exist
-            this.tool = Material.matchMaterial(this.tool_string);
+        if (this.toolString != null) {
+            // Returns null if the entry doesn't exist
+            this.tool = Material.matchMaterial(this.toolString);
 
             if (this.tool == null) {
                 // Couldn't find the specified material
                 this.getLogger().warning(String.format(
                         "Unknown paint tool item: %s",
-                        this.tool_string
+                        this.toolString
                 ));
             } else if (this.tool.isBlock()) {
                 // Paint tool has to be an item
                 this.getLogger().warning(String.format(
                         "Paint tool item %s is a block - blocks can't be used!",
-                        this.tool_string
+                        this.toolString
                 ));
             } else {
                 // We're all good, we'll set up the tool later
-                this.use_tool = true;
+                this.useTool = true;
             }
         } else {
             // Might've been intentional, but log it anyway
@@ -77,47 +76,33 @@ public class Painter extends JavaPlugin {
         }
 
         // Now, let's look at the logger
-        this.logger_string = this.getConfig().getString("logger", null);
+        this.loggerString = this.getConfig().getString("logger", null);
 
-        if (this.logger_string != null) { // Returns null if the entry doesn't exist
-            this.logger_string = this.logger_string.toLowerCase();
-            switch (this.logger_string) {
+        if (this.loggerString != null) {
+            // Returns null if the entry doesn't exist
+            this.loggerString = this.loggerString.toLowerCase();
+            switch (this.loggerString) {
                 // We do manual plugin checking here to avoid problems that go with importing classes
                 case "logblock":
-                    if (this.getServer().getPluginManager().getPlugin("LogBlock") == null) {
-                        this.getLogger().warning("Unable to find logging plugin 'LogBlock'. Block logging will not be available.");
-                        break;
-                    }
-                    this.logger = new logblockLogger(this);
-                    this.use_logger = true;
+                    this.setupLogBlock();
                     break;
                 case "coreprotect":
-                    if (this.getServer().getPluginManager().getPlugin("CoreProtect") == null) {
-                        this.getLogger().warning("Unable to find logging plugin 'CoreProtect'. Block logging will not be available.");
-                        break;
-                    }
-                    this.logger = new coreprotectLogger(this);
-                    this.use_logger = true;
+                    this.setupCoreProtect();
                     break;
                 case "prism":
-                    if (this.getServer().getPluginManager().getPlugin("Prism") == null) {
-                        this.getLogger().warning("Unable to find logging plugin 'Prism'. Block logging will not be available.");
-                        break;
-                    }
-                    this.logger = new prismLogger(this);
-                    this.use_logger = true;
+                    this.setupPrism();
                     break;
                 default:
-                    this.getLogger().warning(String.format("Unknown block logging plugin: '%s'", this.logger_string));
+                    this.getLogger().warning(String.format("Unknown block logging plugin: '%s'", this.loggerString));
                     break;
             }
 
-            if (this.use_logger) {
-                if (! this.logger.setup()) {
-                    this.use_logger = false;
+            if (this.useLogger) {
+                if (! this.blockLogger.setup()) {
+                    this.useLogger = false;
                     this.getLogger().warning(String.format(
                             "Unable to set up logging handler for plugin '%s'. Is it enabled?",
-                            this.logger.getPluginName()
+                            this.blockLogger.getPluginName()
                     ));
                 } else {
                     this.getLogger().info("Block logging set up successfully.");
@@ -136,20 +121,47 @@ public class Painter extends JavaPlugin {
         }
 
         // Now that that's done, let's register events and commands
-        this.breakListener = new blockBreakListener(this);
-        this.commands = new commandExecutor(this);
+        this.breakListener = new BlockBreakListener(this);
+        this.commands = new CommandRunner(this);
 
         this.getServer().getPluginManager().registerEvents(breakListener, this);
         getCommand("painter").setExecutor(this.commands);
     }
 
+    private void setupLogBlock() {
+        if (this.getServer().getPluginManager().getPlugin("LogBlock") == null) {
+            this.getLogger().warning("Unable to find logging plugin 'LogBlock'. Block logging will not be available.");
+            return;
+        }
+        this.blockLogger = new LogblockLogger(this);
+        this.useLogger = true;
+    }
+
+    private void setupCoreProtect() {
+        if (this.getServer().getPluginManager().getPlugin("CoreProtect") == null) {
+            this.getLogger().warning("Unable to find logging plugin 'CoreProtect'. Block logging will not be available.");
+            return;
+        }
+        this.blockLogger = new CoreprotectLogger(this);
+        this.useLogger = true;
+    }
+
+    private void setupPrism() {
+        if (this.getServer().getPluginManager().getPlugin("Prism") == null) {
+            this.getLogger().warning("Unable to find logging plugin 'Prism'. Block logging will not be available.");
+            return;
+        }
+        this.blockLogger = new PrismLogger(this);
+        this.useLogger = true;
+    }
+
     public void blockPainted(Player player, BlockState oldBlockState, BlockState newBlockState, Block block) {
-        if (this.use_logger) {
-            this.logger.blockPainted(player, oldBlockState, newBlockState, block);
+        if (this.useLogger) {
+            this.blockLogger.blockPainted(player, oldBlockState, newBlockState, block);
         }
     }
 
-    public void sendMessage(CommandSender player, String message, HashMap<String, String> args) {
+    public void sendMessage(CommandSender player, String message, Map<String, String> args) {
         String msg = this.getConfig().getString("messages.".concat(message));
 
         if (msg == null) {
@@ -163,7 +175,8 @@ public class Painter extends JavaPlugin {
             return;
         }
 
-        if (args != null) { // Not all messages have tokens
+        if (args != null) {
+            // Not all messages have tokens
             for (String key : args.keySet()) {
                 String origKey = key;
                 key = key.toUpperCase();
@@ -181,6 +194,6 @@ public class Painter extends JavaPlugin {
         if (permissionProvider != null) {
             permissions = permissionProvider.getProvider();
         }
-        return (permissions != null);
+        return permissions != null;
     }
 }

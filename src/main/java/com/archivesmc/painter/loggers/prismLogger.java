@@ -10,11 +10,11 @@ import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-public class prismLogger implements Logger {
+public class PrismLogger implements BlockLogger {
 
     private Painter plugin;
 
-    public prismLogger(Painter plugin) {
+    public PrismLogger(Painter plugin) {
         this.plugin = plugin;
     }
 

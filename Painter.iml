@@ -21,7 +21,7 @@
     <orderEntry type="library" exported="" name="Gradle: js-1.7R2" level="project" />
     <orderEntry type="library" exported="" name="Gradle: jchronic-0.2.4a" level="project" />
     <orderEntry type="library" exported="" name="Gradle: junit-4.8.1" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: unresolved_dependency___net_milkbowl_vault_Vault_1_4_1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: Vault-1.4.1" level="project" />
   </component>
 </module>
 

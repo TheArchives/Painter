@@ -4,7 +4,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
 
-public interface Logger {
+public interface BlockLogger {
     /**
      * Log the fact that a block has been painted.
      * In most cases, we want to log a break and a placement.

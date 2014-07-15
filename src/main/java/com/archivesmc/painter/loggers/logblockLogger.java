@@ -11,12 +11,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 
-public class logblockLogger implements Logger {
+public class LogblockLogger implements BlockLogger {
 
     private Consumer consumer = null;
     private Painter plugin;
 
-    public logblockLogger(Painter plugin) {
+    public LogblockLogger(Painter plugin) {
         this.plugin = plugin;
     }
 

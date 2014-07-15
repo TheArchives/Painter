@@ -13,25 +13,25 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
+import java.util.Map;
 
-public class blockBreakListener implements Listener {
+public class BlockBreakListener implements Listener {
 
     private Painter plugin;
 
-    public blockBreakListener(Painter plugin) {
+    public BlockBreakListener(Painter plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBlockBreakEvent(BlockBreakEvent event) {
-        if(! event.isCancelled())
-        {
+        if(! event.isCancelled()) {
             Player player = event.getPlayer();
 
             if (this.plugin.painters.contains(player.getUniqueId())) {
                 if (! this.plugin.permissions.has(player, "painter.replace")) {
                     this.plugin.painters.remove(player.getUniqueId());
-                    HashMap<String, String> args = new HashMap<>();
+                    Map<String, String> args = new HashMap<>();
                     args.put("permission", "painter.replace");
                     args.put("name", player.getName());
 
