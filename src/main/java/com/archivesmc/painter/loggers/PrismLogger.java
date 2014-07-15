@@ -2,9 +2,13 @@ package com.archivesmc.painter.loggers;
 
 import com.archivesmc.painter.Painter;
 
+import me.botsko.prism.Prism;
+import me.botsko.prism.actionlibs.ActionFactory;
+import me.botsko.prism.actionlibs.ActionType;
 import me.botsko.prism.actionlibs.RecordingQueue;
-import me.botsko.prism.actions.BlockChangeAction;
 
+import me.botsko.prism.actions.Handler;
+import me.botsko.prism.exceptions.InvalidActionException;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
@@ -20,21 +24,12 @@ public class PrismLogger implements BlockLogger {
 
     @Override
     public void blockPainted(Player player, BlockState oldBlockState, BlockState newBlockState, Block block) {
-        BlockChangeAction breakAction = new BlockChangeAction();
-        BlockChangeAction placeAction = new BlockChangeAction();
+        Handler paintAction = ActionFactory.createBlockChange("painter-block-paint",
+                oldBlockState.getLocation(), oldBlockState.getTypeId(), oldBlockState.getRawData(),
+                newBlockState.getTypeId(), newBlockState.getRawData(), player.getName()
+        );
 
-        breakAction.setActionType("block-break");
-        breakAction.setLoc(block.getLocation());
-        breakAction.setBlock(oldBlockState);
-        breakAction.setPlayerName(player);
-
-        placeAction.setActionType("block-place");
-        placeAction.setLoc(block.getLocation());
-        placeAction.setBlock(newBlockState);
-        placeAction.setPlayerName(player);
-
-        RecordingQueue.addToQueue(breakAction);
-        RecordingQueue.addToQueue(placeAction);
+        RecordingQueue.addToQueue(paintAction);
     }
 
     @Override
@@ -46,6 +41,18 @@ public class PrismLogger implements BlockLogger {
     public boolean setup() {
         Plugin pPlugin = this.plugin.getServer().getPluginManager().getPlugin("Prism");
 
-        return pPlugin != null && pPlugin.isEnabled();
+        if (pPlugin != null && pPlugin.isEnabled()) {
+            try {
+                Prism.getActionRegistry().registerCustomAction(this.plugin,
+                        new ActionType("painter-block-paint", true, true, true, "BlockChangeAction", "painted")
+                );
+            } catch (InvalidActionException e) {
+                e.printStackTrace();
+                return false;
+            }
+            return true;
+        }
+
+        return false;
     }
 }

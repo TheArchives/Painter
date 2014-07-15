@@ -5,6 +5,17 @@ Block replacement tools, plus support for LogBlock, Prism and CoreProtect.
 
 See the BukkitDev page (when I make one) for full documentation.
 
+Prism support
+=============
+
+If you want to use this with prism, bear in mind that Painter supports Prism custom actions - namely, it adds the `painter-block-paint` action.
+You may have to add `Painter` to your allowed plugins for this. To do so, do the following..
+
+* Open your `Prism/config.yml` file.
+* Find the section named `allowed-plugins` - it's under `api`, under `tracking`, under `prism`.
+* Add `Painter` to the list.
+* You're ready to go!
+
 Compiling
 =========
 
