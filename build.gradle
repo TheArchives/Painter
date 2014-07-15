@@ -1,6 +1,11 @@
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'build-announcements'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.7
+version = '0.0.1'
+group = "com.archivesmc.painter"
 
 repositories {
     flatDir {
@@ -32,7 +37,6 @@ repositories {
 }
 
 // Create lib folder
-
 def libDir = new File('lib')
 libDir.mkdirs()
 
