@@ -27,4 +27,4 @@ messages:
     command_paint_tool_no_permission: "&dCMP &5\u00BB&6 You do not have permission to use the paint tool"
 
 # Don't change this! You'll break stuff!
-version: 0.0.1pre2
+version: 0.0.1pre3
