@@ -9,15 +9,19 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
-      <excludeFolder url="file://$MODULE_DIR$/lib" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="Gradle: coreprotect-2.0.9" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: LogBlock" level="project" />
     <orderEntry type="library" exported="" name="Gradle: prism-2.0.2" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: vault-1.4.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: bukkit-1.7.9-R0.2" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: CoreProtect-2.0.9" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: logblock-dev-SNAPSHOT" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: worldedit-5.5" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: truezip-6.8.3" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: js-1.7R2" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: jchronic-0.2.4a" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: junit-4.8.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: unresolved_dependency___net_milkbowl_vault_Vault_1_4_1" level="project" />
   </component>
 </module>
 
