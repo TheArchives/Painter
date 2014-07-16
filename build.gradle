@@ -38,6 +38,7 @@ repositories {
 
 jar {
     from sourceSets.main.allJava
+    archiveName = "Painter-${version}.jar"
 }
 
 // Create lib folder
