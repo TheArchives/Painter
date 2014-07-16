@@ -13,11 +13,11 @@ import uk.co.oliwali.HawkEye.entry.BlockChangeEntry;
 import uk.co.oliwali.HawkEye.entry.BlockEntry;
 import uk.co.oliwali.HawkEye.util.HawkEyeAPI;
 
-public class HawkeyeLogger implements BlockLogger {
+public class HawkEyeLogger implements BlockLogger {
 
     private Painter plugin;
 
-    public HawkeyeLogger(Painter plugin) {
+    public HawkEyeLogger(Painter plugin) {
         this.plugin = plugin;
     }
 
@@ -39,13 +39,13 @@ public class HawkeyeLogger implements BlockLogger {
 
     @Override
     public String getPluginName() {
-        return "Hawkeye";
+        return "HawkEye";
     }
 
     @Override
     public boolean setup() {
         final PluginManager pm = this.plugin.getServer().getPluginManager();
-        final Plugin hawkPlugin = pm.getPlugin("Hawkeye");
+        final Plugin hawkPlugin = pm.getPlugin("HawkEye");
 
         return hawkPlugin != null && hawkPlugin.isEnabled();
     }

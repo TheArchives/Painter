@@ -159,12 +159,12 @@ public class Painter extends JavaPlugin {
     }
 
     private void setupHawkeye() {
-        if (this.getServer().getPluginManager().getPlugin("Hawkeye") == null) {
-            this.getLogger().warning("Unable to find logging plugin 'Hawkeye'. Block logging will not be available.");
+        if (this.getServer().getPluginManager().getPlugin("HawkEye") == null) {
+            this.getLogger().warning("Unable to find logging plugin 'HawkEye'. Block logging will not be available.");
             return;
         }
 
-        this.blockLogger = new HawkeyeLogger(this);
+        this.blockLogger = new HawkEyeLogger(this);
         this.useLogger = true;
     }
 
