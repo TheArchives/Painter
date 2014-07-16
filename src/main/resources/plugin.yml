@@ -12,7 +12,7 @@ softdepend: [LogBlock, CoreProtect, Prism, HawkEye]
 commands:
     painter:
         aliases: [paint, ptr, pt, p]
-        description: "Toggle replacement ("toggle" or no arguments) and range replacement modes"
+        description: "Toggle replacement (\"toggle\" or no arguments) and range replacement modes"
         usage: "/<command> [toggle|range]"
 
 permissions:
