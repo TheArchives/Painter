@@ -3,7 +3,7 @@
 # Comment out this entry to disable the wool/clay paint tool
 paint_tool: WOOD_SWORD
 
-# This can be coreprotect, logblock or prism
+# This can be coreprotect, logblock, hawkeye or prism
 # See the plugin documentation for more information on how this works
 # Comment out this entry to disable block logging
 logger: logblock
@@ -27,4 +27,4 @@ messages:
     command_paint_tool_no_permission: "&dCMP &5\u00BB&6 You do not have permission to use the paint tool"
 
 # Don't change this! You'll break stuff!
-version: 0.0.1pre3
+version: 0.0.1pre4

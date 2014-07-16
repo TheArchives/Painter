@@ -48,14 +48,30 @@ libDir.mkdirs()
 
 def f = new File('lib/prism-2.0.2.jar')
 if (!f.exists()) {
+    logger.info('Downloading dependency: prism-2.0.2.jar')
     new URL('http://dhmc.us:8081/nexus/content/repositories/public/me/botsko/prism/2.0.2/prism-2.0.2.jar').withInputStream{ i -> f.withOutputStream{ it << i }}
+} else {
+    logger.info('Dependency already exists: prism-2.0.2.jar')
 }
 
 // Download CoreProtect as well
 
 def g = new File('lib/CoreProtect-2.0.9.jar') // Notice I used a dash here instead of an underscore
 if (!g.exists()) {
+    logger.info('Downloading dependency: CoreProtect-2.0.9.jar')
     new URL('http://dev.bukkit.org/media/files/775/489/CoreProtect_2.0.9.jar').withInputStream{ i -> g.withOutputStream{ it << i }}
+} else {
+    logger.info('Dependency already exists: CoreProtect-2.0.9.jar')
+}
+
+// Download HawkEye
+
+def h = new File('lib/HawkEye-1.6.0.jar') // Devs don't include the version for some reason
+if (!h.exists()) {
+    logger.info('Downloading dependency: HawkEye-1.6.0.jar')
+    new URL('http://dev.bukkit.org/media/files/731/750/HawkEye.jar').withInputStream{ i -> h.withOutputStream{ it << i }}
+} else {
+    logger.info('Dependency already exists: HawkEye-1.6.0.jar')
 }
 
 dependencies {
@@ -64,4 +80,5 @@ dependencies {
     compile 'me.botsko:prism:2.0.2'
     compile 'net.milkbowl.vault:Vault:1.4.1'
     compile 'org.bukkit:bukkit:1.7.9-R0.2'
+    compile 'uk.co.oliwali:HawkEye:1.6.0'
 }

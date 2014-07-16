@@ -2,10 +2,7 @@ package com.archivesmc.painter;
 
 import com.archivesmc.painter.listeners.BlockBreakListener;
 import com.archivesmc.painter.listeners.CommandRunner;
-import com.archivesmc.painter.loggers.BlockLogger;
-import com.archivesmc.painter.loggers.CoreprotectLogger;
-import com.archivesmc.painter.loggers.LogblockLogger;
-import com.archivesmc.painter.loggers.PrismLogger;
+import com.archivesmc.painter.loggers.*;
 
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Material;
@@ -92,6 +89,9 @@ public class Painter extends JavaPlugin {
                 case "prism":
                     this.setupPrism();
                     break;
+                case "hawkeye":
+                    this.setupHawkeye();
+                    break;
                 default:
                     this.getLogger().warning(String.format("Unknown block logging plugin: '%s'", this.loggerString));
                     break;
@@ -133,6 +133,7 @@ public class Painter extends JavaPlugin {
             this.getLogger().warning("Unable to find logging plugin 'LogBlock'. Block logging will not be available.");
             return;
         }
+
         this.blockLogger = new LogblockLogger(this);
         this.useLogger = true;
     }
@@ -142,6 +143,7 @@ public class Painter extends JavaPlugin {
             this.getLogger().warning("Unable to find logging plugin 'CoreProtect'. Block logging will not be available.");
             return;
         }
+
         this.blockLogger = new CoreprotectLogger(this);
         this.useLogger = true;
     }
@@ -151,7 +153,18 @@ public class Painter extends JavaPlugin {
             this.getLogger().warning("Unable to find logging plugin 'Prism'. Block logging will not be available.");
             return;
         }
+
         this.blockLogger = new PrismLogger(this);
+        this.useLogger = true;
+    }
+
+    private void setupHawkeye() {
+        if (this.getServer().getPluginManager().getPlugin("Hawkeye") == null) {
+            this.getLogger().warning("Unable to find logging plugin 'Hawkeye'. Block logging will not be available.");
+            return;
+        }
+
+        this.blockLogger = new HawkeyeLogger(this);
         this.useLogger = true;
     }
 

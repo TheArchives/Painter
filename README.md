@@ -1,7 +1,7 @@
 Painter
 =======
 
-Block replacement tools, plus support for LogBlock, Prism and CoreProtect.
+Block replacement tools, plus support for LogBlock, Prism, Hawkeye and CoreProtect.
 
 See the BukkitDev page (when I make one) for full documentation.
 
