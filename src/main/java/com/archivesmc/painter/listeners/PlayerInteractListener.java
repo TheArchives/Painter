@@ -24,11 +24,13 @@ public class PlayerInteractListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerInteractEvent(PlayerInteractEvent event) {
-        if(! event.isCancelled()) {
+//        if(! event.isCancelled()) {
             Player player = event.getPlayer();
 
-            if (this.plugin.range_painters.contains(player.getUniqueId())
-                    && event.getAction() == Action.LEFT_CLICK_AIR) {
+            if (this.plugin.range_painters.contains(player.getUniqueId()) &&
+                    event.getAction() == Action.LEFT_CLICK_AIR
+            ) {
+                this.plugin.getLogger().info("Event!");
                 if (! this.plugin.permissions.has(player, "painter.replace.range")) {
                     this.plugin.range_painters.remove(player.getUniqueId());
 
@@ -44,6 +46,7 @@ public class PlayerInteractListener implements Listener {
                 Material heldMat = items.getType();
 
                 if (heldMat.isBlock()) {
+                    this.plugin.getLogger().info("It's a block!");
                     Block block = player.getTargetBlock(null, 100);
                     BlockState oldBlockState = block.getState();
 
@@ -56,6 +59,6 @@ public class PlayerInteractListener implements Listener {
                     this.plugin.blockPainted(player, oldBlockState, block.getState(), block);
                 }
             }
-        }
+//        }
     }
 }
