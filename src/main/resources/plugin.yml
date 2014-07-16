@@ -1,5 +1,5 @@
 name: Painter
-version: 0.0.1pre4
+version: 0.0.1pre5
 description: Allows the painting of wool and clay, and the replacing of blocks
 
 author: Gareth Coles
@@ -7,22 +7,21 @@ author: Gareth Coles
 main: com.archivesmc.painter.Painter
 database: false
 depend: [Vault]
-softdepend: [LogBlock, CoreProtect, Prism, Hawkeye]
+softdepend: [LogBlock, CoreProtect, Prism, HawkEye]
 
 commands:
     painter:
         aliases: [paint, ptr, pt, p]
-        description: "Enter or leave block replacement mode, or change the colours on your wool/clay paint tool"
-        usage: "/<command> [left-click colour] [right-click colour]\n/<command> \u00BB Toggle block replacement mode\n/<command> red white \u00BB Set colours on the paint tool\n/<command> - black \u00BB Set only the right-click colour on the paint tool"
+        description: "Toggle replacement ("toggle" or no arguments) and range replacement modes"
+        usage: "/<command> [toggle|range]"
 
 permissions:
     painter.*:
         children:
-            painter.tool: true
             painter.replace: true
-            painter.command: true
+            painter.replace.range: true
         description: All the Painter permissions
-    painter.tool:
-        description: Use the wool/clay paint tool
     painter.replace:
         description: Replace blocks by breaking them
+    painter.replace.range:
+        description: Replace blocks at range by left-clicking

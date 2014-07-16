@@ -1,12 +1,7 @@
-# Paint tool - the item to use
-# See here for names: http://jd.bukkit.org/dev/apidocs/org/bukkit/Material.html
-# Comment out this entry to disable the wool/clay paint tool
-paint_tool: WOOD_SWORD
-
 # This can be coreprotect, logblock, hawkeye or prism
 # See the plugin documentation for more information on how this works
 # Comment out this entry to disable block logging
-logger: logblock
+logger: prism
 
 # The rest of this file contains various message strings for you to customize.
 # You can't leave any of these out! Make sure they're all here!
@@ -19,12 +14,19 @@ messages:
     # Tokens: {NAME}
     replace_mode_disable: "&dCMP &5\u00BB&6 Replace mode disabled, you are no longer replacing blocks"
 
+    # Tokens: {PERMISSION}, {NAME}
+    range_replace_perm_lost: "&dCMP &5\u00BB&6 Range replace disabled, your access to it has been &crevoked"
+    # Tokens: {NAME}
+    range_replace_mode_enable: "&dCMP &5\u00BB&6 Range replace enabled, you are now replacing blocks at a distance"
+    # Tokens: {NAME}
+    range_replace_mode_disable: "&dCMP &5\u00BB&6 Range replace disabled, you are no longer replacing blocks at a distance"
+
     # Tokens: {NAME}
     command_player_only: "&dCMP &5\u00BB&6 This command can only be run by a player"
     # Tokens: {PERMISSION}, {NAME}
     command_replace_no_permission: "&dCMP &5\u00BB&6 You do not have permission to toggle replace mode"
     # Tokens: {PERMISSION}, {NAME}
-    command_paint_tool_no_permission: "&dCMP &5\u00BB&6 You do not have permission to use the paint tool"
+    command_range_replace_no_permission: "&dCMP &5\u00BB&6 You do not have permission to toggle range replace mode"
 
 # Don't change this! You'll break stuff!
-version: 0.0.1pre4
+version: 0.0.1pre5

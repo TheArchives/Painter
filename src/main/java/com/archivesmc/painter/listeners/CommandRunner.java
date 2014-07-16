@@ -26,7 +26,7 @@ public class CommandRunner implements CommandExecutor {
                 this.plugin.sendMessage(commandSender, "command_player_only", args);
             } else {
                 UUID id = ((Player) commandSender).getUniqueId();
-                if (strings.length < 1) {
+                if (strings.length < 1 || "toggle".equalsIgnoreCase(strings[0])) {
                     if (this.plugin.permissions.has(commandSender, "painter.replace")) {
                         if (this.plugin.painters.contains(id)) {
                             this.plugin.painters.remove(id);
@@ -50,9 +50,30 @@ public class CommandRunner implements CommandExecutor {
 
                         this.plugin.sendMessage(commandSender, "command_replace_no_permission", args);
                     }
-                } else {
-                    // TODO: Paint tool
-                    commandSender.sendMessage("Paint tool isn't implemented yet!");
+                } else if ("range".equalsIgnoreCase(strings[0])) {
+                    if (this.plugin.permissions.has(commandSender, "painter.replace.range")) {
+                        if (this.plugin.range_painters.contains(id)) {
+                            this.plugin.range_painters.remove(id);
+
+                            Map<String, String> args = new HashMap<>();
+                            args.put("name", commandSender.getName());
+
+                            this.plugin.sendMessage(commandSender, "range_replace_mode_disable", args);
+                        } else {
+                            this.plugin.range_painters.add(id);
+
+                            Map<String, String> args = new HashMap<>();
+                            args.put("name", commandSender.getName());
+
+                            this.plugin.sendMessage(commandSender, "range_replace_mode_enable", args);
+                        }
+                    } else {
+                        Map<String, String> args = new HashMap<>();
+                        args.put("permission", "painter.replace.range");
+                        args.put("name", commandSender.getName());
+
+                        this.plugin.sendMessage(commandSender, "command_range_replace_no_permission", args);
+                    }
                 }
             }
 

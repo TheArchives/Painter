@@ -2,6 +2,7 @@ package com.archivesmc.painter;
 
 import com.archivesmc.painter.listeners.BlockBreakListener;
 import com.archivesmc.painter.listeners.CommandRunner;
+import com.archivesmc.painter.listeners.PlayerInteractListener;
 import com.archivesmc.painter.loggers.*;
 
 import net.milkbowl.vault.permission.Permission;
@@ -29,9 +30,7 @@ public class Painter extends JavaPlugin {
     boolean useTool = false;
 
     public Set<UUID> painters;
-
-    private BlockBreakListener breakListener;
-    private CommandRunner commands;
+    public Set<UUID> range_painters;
 
     public Permission permissions;
 
@@ -43,6 +42,7 @@ public class Painter extends JavaPlugin {
 
         // Assign painters set here in case we're reloading, instead of in the class definition
         this.painters = new HashSet<>();
+        this.range_painters = new HashSet<>();
 
         // First, let's start with the paint tool material
         this.toolString = this.getConfig().getString("paint_tool", null);
@@ -121,11 +121,13 @@ public class Painter extends JavaPlugin {
         }
 
         // Now that that's done, let's register events and commands
-        this.breakListener = new BlockBreakListener(this);
-        this.commands = new CommandRunner(this);
+        BlockBreakListener breakListener = new BlockBreakListener(this);
+        PlayerInteractListener interactListener = new PlayerInteractListener(this);
+        CommandRunner commands = new CommandRunner(this);
 
         this.getServer().getPluginManager().registerEvents(breakListener, this);
-        getCommand("painter").setExecutor(this.commands);
+        this.getServer().getPluginManager().registerEvents(interactListener, this);
+        getCommand("painter").setExecutor(commands);
     }
 
     private void setupLogBlock() {
