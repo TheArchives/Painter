@@ -44,7 +44,7 @@ public class PrismLogger implements BlockLogger {
         if (pPlugin != null && pPlugin.isEnabled()) {
             try {
                 Prism.getActionRegistry().registerCustomAction(this.plugin,
-                        new ActionType("painter-block-paint", true, true, true, "BlockChangeAction", "painted")
+                        new ActionType("painter-block-paint", true, true, true, "BlockChangeAction", "painted on")
                 );
             } catch (InvalidActionException e) {
                 e.printStackTrace();
