@@ -5,6 +5,10 @@ Block replacement tools, plus support for LogBlock, Prism, Hawkeye and CoreProte
 
 See the BukkitDev page (when I make one) for full documentation.
 
+You can find development builds [on Bamboo](http://bamboo.gserv.me/browse/PLUG-PTR).
+Remember, they haven't been approved by the BukkitDev staff! Use them at your own risk (but remember, you can check the
+source included in the jar).
+
 Prism support
 =============
 
