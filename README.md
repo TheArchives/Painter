@@ -1,7 +1,7 @@
-[WordWarning](https://github.com/gdude2002/WordWarning) | **Painter**
-
 Painter
 =======
+
+My plugins: [WordWarning](https://github.com/gdude2002/WordWarning) | **Painter**
 
 Block replacement tools, plus support for LogBlock, Prism, Hawkeye and CoreProtect.
 
