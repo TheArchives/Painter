@@ -24,41 +24,42 @@ public class PlayerInteractListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerInteractEvent(PlayerInteractEvent event) {
-//        if(! event.isCancelled()) {
-            Player player = event.getPlayer();
+        Player player = event.getPlayer();
 
-            if (this.plugin.range_painters.contains(player.getUniqueId()) &&
-                    event.getAction() == Action.LEFT_CLICK_AIR
-            ) {
-                this.plugin.getLogger().info("Event!");
-                if (! this.plugin.permissions.has(player, "painter.replace.range")) {
-                    this.plugin.range_painters.remove(player.getUniqueId());
+        if (this.plugin.range_painters.contains(player.getUniqueId()) &&
+                event.getAction() == Action.LEFT_CLICK_AIR
+        ) {
+            if (! this.plugin.permissions.has(player, "painter.replace.range")) {
+                this.plugin.range_painters.remove(player.getUniqueId());
 
-                    Map<String, String> args = new HashMap<>();
-                    args.put("permission", "painter.replace.range");
-                    args.put("name", player.getName());
+                Map<String, String> args = new HashMap<>();
+                args.put("permission", "painter.replace.range");
+                args.put("name", player.getName());
 
-                    this.plugin.sendMessage(player, "range_replace_perm_lost", args);
+                this.plugin.sendMessage(player, "range_replace_perm_lost", args);
+                return;
+            }
+
+            ItemStack items = player.getItemInHand();
+            Material heldMat = items.getType();
+
+            if (heldMat.isBlock()) {
+                Block block = player.getTargetBlock(null, 100);
+
+                if (block == null) {
                     return;
                 }
 
-                ItemStack items = player.getItemInHand();
-                Material heldMat = items.getType();
+                BlockState oldBlockState = block.getState();
 
-                if (heldMat.isBlock()) {
-                    this.plugin.getLogger().info("It's a block!");
-                    Block block = player.getTargetBlock(null, 100);
-                    BlockState oldBlockState = block.getState();
+                block.setType(heldMat);
+                block.setData(items.getData().getData());
 
-                    block.setType(heldMat);
-                    block.setData(items.getData().getData());
+                event.setCancelled(true);
 
-                    event.setCancelled(true);
-
-                    // Log it if it's being logged
-                    this.plugin.blockPainted(player, oldBlockState, block.getState(), block);
-                }
+                // Log it if it's being logged
+                this.plugin.blockPainted(player, oldBlockState, block.getState(), block);
             }
-//        }
+        }
     }
 }
