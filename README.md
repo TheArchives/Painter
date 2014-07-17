@@ -9,6 +9,9 @@ You can find development builds [on Bamboo](http://bamboo.gserv.me/browse/PLUG-P
 Remember, they haven't been approved by the BukkitDev staff! Use them at your own risk (but remember, you can check the
 source included in the jar).
 
+The latest built jar is always available
+[at this directory listing](bamboo.gserv.me/browse/PLUG-PTR/latest/artifact/JOB1/Painter/).
+
 Prism support
 =============
 
