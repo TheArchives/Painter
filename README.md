@@ -5,9 +5,9 @@ My plugins: [WordWarning](https://github.com/gdude2002/WordWarning) | **Painter*
 
 ---
 
-Block replacement tools, plus support for LogBlock, Prism, Hawkeye and CoreProtect.
+Block replacement tools, plus support for LogBlock, Prism, Hawkeye and CoreProtect, as well as permissions via Vault.
 
-See the BukkitDev page (when I make one) for full documentation.
+See the [BukkitDev page](http://dev.bukkit.org/bukkit-plugins/painter/) for full documentation.
 
 You can find development builds [on Bamboo](http://bamboo.gserv.me/browse/PLUG-PTR).
 Remember, they haven't been approved by the BukkitDev staff! Use them at your own risk (but remember, you can check the
