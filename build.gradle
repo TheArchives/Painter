@@ -2,6 +2,7 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'build-announcements'
 apply plugin: 'maven'
+apply plugin: 'ivy-publish'
 
 sourceCompatibility = 1.7
 version = '0.0.1'
@@ -11,6 +12,11 @@ repositories {
     flatDir {
         // dirs '../lib', 'lib'
         dirs 'lib'
+    }
+    // Local Ivy repo
+    flatDir {
+        name "ivy"
+        dirs "/var/www/gserv/cherry/repos/ivy/"
     }
     // Bukkit
     maven {
@@ -39,6 +45,19 @@ repositories {
 jar {
     from sourceSets.main.allJava
     archiveName = "Painter-${version}.jar"
+}
+
+artifacts {
+    archives jar
+}
+
+uploadArchives {
+    repositories {
+        add project.repositories.ivy
+        mavenDeployer {
+            repository(url: "file://localhost/var/www/gserv/cherry/repos/maven/")
+        }
+    }
 }
 
 // Create lib folder
