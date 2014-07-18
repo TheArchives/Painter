@@ -25,6 +25,7 @@ repositories {
     // Prism
 //    maven {
 //        // Blocked by most corporate (read: crap) firewalls
+//        // Also, horribly broken atm
 //        url 'http://dhmc.us:8081/nexus/content/repositories/public/'
 //    }
     // LogBlock
@@ -65,7 +66,7 @@ publishing {
     repositories {
         ivy {
             name "publish"
-            url "/var/www/gserv/cherry/repos/ivy/" // change to point to your repo, e.g. http://my.org/repo
+            url "/var/www/gserv/cherry/repos/ivy/"
         }
     }
 }
