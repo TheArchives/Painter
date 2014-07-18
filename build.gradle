@@ -44,7 +44,6 @@ jar {
 
 artifacts {
     archives jar
-    name = "Painter"
 }
 
 uploadArchives {
