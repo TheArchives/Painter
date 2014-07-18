@@ -19,7 +19,7 @@ The latest built jar is always available
 Maven/Ivy repos
 ===============
 
-Gradle automatically builds the following repos for you.
+Gradle automatically builds the following repos for your use.
 
 * Ivy: http://cherry.gserv.me/repos/ivy/
 * Maven: http://cherry.gserv.me/repos/maven/
