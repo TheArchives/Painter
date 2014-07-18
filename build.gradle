@@ -48,12 +48,24 @@ artifacts {
 
 uploadArchives {
     repositories {
-        ivy {
-            url "file://localhost/var/www/gserv/cherry/repos/ivy/"
-        }
         mavenDeployer {
             pom.artifactId = "Painter"
             repository(url: "file://localhost/var/www/gserv/cherry/repos/maven/")
+        }
+    }
+}
+
+publishing {
+    publications {
+        ivyJava(IvyPublication) {
+            from components.java
+            module "Painter"
+        }
+    }
+    repositories {
+        ivy {
+            name "publish"
+            url "/var/www/gserv/cherry/repos/ivy/" // change to point to your repo, e.g. http://my.org/repo
         }
     }
 }
