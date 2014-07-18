@@ -14,7 +14,7 @@ Remember, they haven't been approved by the BukkitDev staff! Use them at your ow
 source included in the jar).
 
 The latest built jar is always available
-[at this directory listing](bamboo.gserv.me/browse/PLUG-PTR/latest/artifact/JOB1/Painter/).
+[at this directory listing](http://bamboo.gserv.me/browse/PLUG-PTR/latest/artifact/JOB1/Version-agnostic-jar/Painter.jar).
 
 Maven/Ivy repos
 ===============
