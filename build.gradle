@@ -13,11 +13,6 @@ repositories {
         // dirs '../lib', 'lib'
         dirs 'lib'
     }
-    // Local Ivy repo
-    flatDir {
-        name "ivy"
-        dirs "/var/www/gserv/cherry/repos/ivy/"
-    }
     // Bukkit
     maven {
         url 'http://repo.bukkit.org/content/groups/public/'
@@ -49,12 +44,16 @@ jar {
 
 artifacts {
     archives jar
+    name: "Painter"
 }
 
 uploadArchives {
     repositories {
-        add project.repositories.ivy
+        ivy {
+            url "file://localhost/var/www/gserv/cherry/repos/ivy/"
+        }
         mavenDeployer {
+            pom.artifactId = "Painter"
             repository(url: "file://localhost/var/www/gserv/cherry/repos/maven/")
         }
     }

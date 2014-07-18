@@ -16,6 +16,16 @@ source included in the jar).
 The latest built jar is always available
 [at this directory listing](bamboo.gserv.me/browse/PLUG-PTR/latest/artifact/JOB1/Painter/).
 
+Maven/Ivy repos
+===============
+
+Gradle automatically builds the following repos for you.
+
+* Ivy: http://cherry.gserv.me/repos/ivy/
+* Maven: http://cherry.gserv.me/repos/maven/
+
+This plugin doesn't have an API, but if you need to use it as a dependency, you can use the above repos.
+
 Prism support
 =============
 
