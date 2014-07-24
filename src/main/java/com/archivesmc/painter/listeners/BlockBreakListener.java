@@ -38,9 +38,9 @@ public class BlockBreakListener implements Listener {
         if(! event.isCancelled()) {
             Player player = event.getPlayer();
 
-            if (this.plugin.painters.contains(player.getUniqueId())) {
-                if (! this.plugin.permissions.has(player, "painter.replace")) {
-                    this.plugin.painters.remove(player.getUniqueId());
+            if (this.plugin.isPainter(player.getUniqueId())) {
+                if (! this.plugin.hasPermission(player, "painter.replace")) {
+                    this.plugin.setPainter(player.getUniqueId(), false);
 
                     Map<String, String> args = new HashMap<>();
                     args.put("permission", "painter.replace");

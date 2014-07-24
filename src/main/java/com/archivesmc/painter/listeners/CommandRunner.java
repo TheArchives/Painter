@@ -42,16 +42,16 @@ public class CommandRunner implements CommandExecutor {
             } else {
                 UUID id = ((Player) commandSender).getUniqueId();
                 if (strings.length < 1 || "toggle".equalsIgnoreCase(strings[0])) {
-                    if (this.plugin.permissions.has(commandSender, "painter.replace")) {
-                        if (this.plugin.painters.contains(id)) {
-                            this.plugin.painters.remove(id);
+                    if (this.plugin.hasPermission(commandSender, "painter.replace")) {
+                        if (this.plugin.isPainter(id)) {
+                            this.plugin.setPainter(id, false);
 
                             Map<String, String> args = new HashMap<>();
                             args.put("name", commandSender.getName());
 
                             this.plugin.sendMessage(commandSender, "replace_mode_disable", args);
                         } else {
-                            this.plugin.painters.add(id);
+                            this.plugin.setPainter(id, true);
 
                             Map<String, String> args = new HashMap<>();
                             args.put("name", commandSender.getName());
@@ -66,16 +66,16 @@ public class CommandRunner implements CommandExecutor {
                         this.plugin.sendMessage(commandSender, "command_replace_no_permission", args);
                     }
                 } else if ("range".equalsIgnoreCase(strings[0])) {
-                    if (this.plugin.permissions.has(commandSender, "painter.replace.range")) {
-                        if (this.plugin.rangePainters.contains(id)) {
-                            this.plugin.rangePainters.remove(id);
+                    if (this.plugin.hasPermission(commandSender, "painter.replace.range")) {
+                        if (this.plugin.isRangePainter(id)) {
+                            this.plugin.setRangePainter(id, false);
 
                             Map<String, String> args = new HashMap<>();
                             args.put("name", commandSender.getName());
 
                             this.plugin.sendMessage(commandSender, "range_replace_mode_disable", args);
                         } else {
-                            this.plugin.rangePainters.add(id);
+                            this.plugin.setRangePainter(id, true);
 
                             Map<String, String> args = new HashMap<>();
                             args.put("name", commandSender.getName());

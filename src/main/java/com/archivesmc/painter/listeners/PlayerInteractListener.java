@@ -38,11 +38,11 @@ public class PlayerInteractListener implements Listener {
     public void onPlayerInteractEvent(PlayerInteractEvent event) {
         Player player = event.getPlayer();
 
-        if (this.plugin.rangePainters.contains(player.getUniqueId()) &&
+        if (this.plugin.isRangePainter(player.getUniqueId()) &&
                 event.getAction() == Action.LEFT_CLICK_AIR
         ) {
-            if (! this.plugin.permissions.has(player, "painter.replace.range")) {
-                this.plugin.rangePainters.remove(player.getUniqueId());
+            if (! this.plugin.hasPermission(player, "painter.replace.range")) {
+                this.plugin.setRangePainter(player.getUniqueId(), false);
 
                 Map<String, String> args = new HashMap<>();
                 args.put("permission", "painter.replace.range");

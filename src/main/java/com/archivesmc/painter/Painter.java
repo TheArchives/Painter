@@ -22,25 +22,14 @@ import static org.bukkit.ChatColor.translateAlternateColorCodes;
  */
 public class Painter extends JavaPlugin {
 
-    BlockLogger blockLogger;
-    String loggerString;
+    private BlockLogger blockLogger;
+    private String loggerString;
 
-    boolean useLogger = false;
+    private boolean useLogger = false;
 
-    /**
-     * Set of player UUIDs that are currently using close-range painting
-     */
-    public Set<UUID> painters;
-
-    /**
-     * Set of player UUIDs that are currently using long-range painting
-     */
-    public Set<UUID> rangePainters;
-
-    /**
-     * Vault permissions object
-     */
-    public Permission permissions;
+    private Set<UUID> painters;
+    private Set<UUID> rangePainters;
+    private Permission permissions;
 
     /**
      * Called by Bukkit when the plugin is enabled.
@@ -226,5 +215,67 @@ public class Painter extends JavaPlugin {
             permissions = permissionProvider.getProvider();
         }
         return permissions != null;
+    }
+
+    /**
+     * Returns whether the player is in nearby-painting mode
+     * @param player The UUID of the player to check
+     * @return Whether the player is in nearby-painting mode
+     */
+    public boolean isPainter(UUID player) {
+        return this.painters.contains(player);
+    }
+
+    /**
+     * Set whether a player is in nearby-painting mode or not
+     * @param player The UUID of the player to check
+     * @param set Whether the player should be set to nearby-painting mode or not
+     */
+    public void setPainter(UUID player, boolean set) {
+        if (set) {
+            if (! this.painters.contains(player)) {
+                this.painters.add(player);
+            }
+        } else {
+            if (this.painters.contains(player)) {
+                this.painters.remove(player);
+            }
+        }
+    }
+
+    /**
+     * Returns whether the player is in range-painting mode
+     * @param player The UUID of the player to check
+     * @return Whether the player is in range-painting mode
+     */
+    public boolean isRangePainter(UUID player) {
+        return this.rangePainters.contains(player);
+    }
+
+    /**
+     * Set whether a player is in range-painting mode or not
+     * @param player The UUID of the player to check
+     * @param set Whether the player should be set to range-painting mode or not
+     */
+    public void setRangePainter(UUID player, boolean set) {
+        if (set) {
+            if (! this.rangePainters.contains(player)) {
+                this.rangePainters.add(player);
+            }
+        } else {
+            if (this.rangePainters.contains(player)) {
+                this.rangePainters.remove(player);
+            }
+        }
+    }
+
+    /**
+     * Uses vault to check whether a CommandSender has a certain permission
+     * @param sender The Player or other CommandSender to check permissions for
+     * @param permission The permissions to check for
+     * @return Whether the CommandSender has the specified permission
+     */
+    public boolean hasPermission(CommandSender sender, String permission) {
+        return this.permissions.has(sender, permission);
     }
 }
