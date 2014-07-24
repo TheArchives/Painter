@@ -23,7 +23,6 @@ import static org.bukkit.ChatColor.translateAlternateColorCodes;
 public class Painter extends JavaPlugin {
 
     private BlockLogger blockLogger;
-    private String loggerString;
 
     private boolean useLogger = false;
 
@@ -45,12 +44,12 @@ public class Painter extends JavaPlugin {
         this.rangePainters = new HashSet<>();
 
         // Now, let's look at the logger
-        this.loggerString = this.getConfig().getString("logger", null);
+        String loggerString = this.getConfig().getString("logger", null);
 
-        if (this.loggerString != null) {
+        if (loggerString != null) {
             // Returns null if the entry doesn't exist
-            this.loggerString = this.loggerString.toLowerCase();
-            switch (this.loggerString) {
+            loggerString = loggerString.toLowerCase();
+            switch (loggerString) {
                 // We do manual plugin checking here to avoid problems that go with importing classes
                 case "logblock":
                     this.setupLogBlock();
@@ -65,7 +64,7 @@ public class Painter extends JavaPlugin {
                     this.setupHawkeye();
                     break;
                 default:
-                    this.getLogger().warning(String.format("Unknown block logging plugin: '%s'", this.loggerString));
+                    this.getLogger().warning(String.format("Unknown block logging plugin: '%s'", loggerString));
                     break;
             }
 
