@@ -67,15 +67,15 @@ public class CommandRunner implements CommandExecutor {
                     }
                 } else if ("range".equalsIgnoreCase(strings[0])) {
                     if (this.plugin.permissions.has(commandSender, "painter.replace.range")) {
-                        if (this.plugin.range_painters.contains(id)) {
-                            this.plugin.range_painters.remove(id);
+                        if (this.plugin.rangePainters.contains(id)) {
+                            this.plugin.rangePainters.remove(id);
 
                             Map<String, String> args = new HashMap<>();
                             args.put("name", commandSender.getName());
 
                             this.plugin.sendMessage(commandSender, "range_replace_mode_disable", args);
                         } else {
-                            this.plugin.range_painters.add(id);
+                            this.plugin.rangePainters.add(id);
 
                             Map<String, String> args = new HashMap<>();
                             args.put("name", commandSender.getName());

@@ -31,18 +31,18 @@ public class PlayerInteractListener implements Listener {
 
     /**
      * Handles the PlayerInteractEvent, which is used for ranged-painting mode.
-     * 
+     *
      * @param event The PlayerInteractEvent to handle
      */
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerInteractEvent(PlayerInteractEvent event) {
         Player player = event.getPlayer();
 
-        if (this.plugin.range_painters.contains(player.getUniqueId()) &&
+        if (this.plugin.rangePainters.contains(player.getUniqueId()) &&
                 event.getAction() == Action.LEFT_CLICK_AIR
         ) {
             if (! this.plugin.permissions.has(player, "painter.replace.range")) {
-                this.plugin.range_painters.remove(player.getUniqueId());
+                this.plugin.rangePainters.remove(player.getUniqueId());
 
                 Map<String, String> args = new HashMap<>();
                 args.put("permission", "painter.replace.range");

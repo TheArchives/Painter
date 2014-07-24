@@ -35,7 +35,7 @@ public class Painter extends JavaPlugin {
     /**
      * Set of player UUIDs that are currently using long-range painting
      */
-    public Set<UUID> range_painters;
+    public Set<UUID> rangePainters;
 
     /**
      * Vault permissions object
@@ -53,7 +53,7 @@ public class Painter extends JavaPlugin {
 
         // Assign painters set here in case we're reloading, instead of in the class definition
         this.painters = new HashSet<>();
-        this.range_painters = new HashSet<>();
+        this.rangePainters = new HashSet<>();
 
         // Now, let's look at the logger
         this.loggerString = this.getConfig().getString("logger", null);
