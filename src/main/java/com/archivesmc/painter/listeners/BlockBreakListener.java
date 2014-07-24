@@ -15,6 +15,12 @@ import org.bukkit.inventory.ItemStack;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Gareth Coles
+ *
+ * This is an event listener for block breakages. It's used for painting over blocks
+ * when a painter breaks them.
+ */
 public class BlockBreakListener implements Listener {
 
     private Painter plugin;
@@ -23,6 +29,10 @@ public class BlockBreakListener implements Listener {
         this.plugin = plugin;
     }
 
+    /**
+     * Handles the blockBreakEvent for painting blocks in nearby-painting mode.
+     * @param event The BlockBreakEvent to handle
+     */
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBlockBreakEvent(BlockBreakEvent event) {
         if(! event.isCancelled()) {

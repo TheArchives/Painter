@@ -15,6 +15,13 @@ import org.bukkit.inventory.ItemStack;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Gareth Coles
+ *
+ * This is an event listener for the PlayerInteractEvent. This event is finnicky and
+ * is cancelled by default when the player is left-clicking air, but we need it for
+ * ranged-painting mode.
+ */
 public class PlayerInteractListener implements Listener {
     Painter plugin;
 
@@ -22,6 +29,11 @@ public class PlayerInteractListener implements Listener {
         this.plugin = plugin;
     }
 
+    /**
+     * Handles the PlayerInteractEvent, which is used for ranged-painting mode.
+     * 
+     * @param event The PlayerInteractEvent to handle
+     */
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerInteractEvent(PlayerInteractEvent event) {
         Player player = event.getPlayer();

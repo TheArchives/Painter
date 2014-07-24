@@ -10,12 +10,27 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * @author Gareth Coles
+ *
+ * This is the command runner for this plugin. We define all our
+ * commands here.
+ */
 public class CommandRunner implements CommandExecutor {
     private Painter plugin;
 
     public CommandRunner(Painter plugin) {
         this.plugin = plugin;
     }
+
+    /**
+     * Handles a command.
+     * @param commandSender Player or Console that ran the command
+     * @param command String as defined in the plugin.yml naming the command
+     * @param s String representing the entire command
+     * @param strings Array of strings representing the arguments to the command
+     * @return Whether this plugin has implemented the command or not
+     */
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if ("painter".equalsIgnoreCase(command.getLabel())) {

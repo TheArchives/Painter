@@ -6,7 +6,6 @@ import com.archivesmc.painter.listeners.PlayerInteractListener;
 import com.archivesmc.painter.loggers.*;
 
 import net.milkbowl.vault.permission.Permission;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.command.CommandSender;
@@ -18,22 +17,34 @@ import java.util.*;
 
 import static org.bukkit.ChatColor.translateAlternateColorCodes;
 
+/**
+ * @author Gareth Coles
+ */
 public class Painter extends JavaPlugin {
-
-    Material tool;
-    String toolString;
 
     BlockLogger blockLogger;
     String loggerString;
 
     boolean useLogger = false;
-    boolean useTool = false;
 
+    /**
+     * Set of player UUIDs that are currently using close-range painting
+     */
     public Set<UUID> painters;
+
+    /**
+     * Set of player UUIDs that are currently using long-range painting
+     */
     public Set<UUID> range_painters;
 
+    /**
+     * Vault permissions object
+     */
     public Permission permissions;
 
+    /**
+     * Called by Bukkit when the plugin is enabled.
+     */
     @Override
     public void onEnable() {
         // Save default config if it doesn't exist, and reload it in case the plugin's been reloaded
@@ -43,34 +54,6 @@ public class Painter extends JavaPlugin {
         // Assign painters set here in case we're reloading, instead of in the class definition
         this.painters = new HashSet<>();
         this.range_painters = new HashSet<>();
-
-        // First, let's start with the paint tool material
-        this.toolString = this.getConfig().getString("paint_tool", null);
-
-        if (this.toolString != null) {
-            // Returns null if the entry doesn't exist
-            this.tool = Material.matchMaterial(this.toolString);
-
-            if (this.tool == null) {
-                // Couldn't find the specified material
-                this.getLogger().warning(String.format(
-                        "Unknown paint tool item: %s",
-                        this.toolString
-                ));
-            } else if (this.tool.isBlock()) {
-                // Paint tool has to be an item
-                this.getLogger().warning(String.format(
-                        "Paint tool item %s is a block - blocks can't be used!",
-                        this.toolString
-                ));
-            } else {
-                // We're all good, we'll set up the tool later
-                this.useTool = true;
-            }
-        } else {
-            // Might've been intentional, but log it anyway
-            this.getLogger().info("No paint tool material found, paint tool will not be available.");
-        }
 
         // Now, let's look at the logger
         this.loggerString = this.getConfig().getString("logger", null);
@@ -170,12 +153,45 @@ public class Painter extends JavaPlugin {
         this.useLogger = true;
     }
 
+    /**
+     * Log that a block has been painted, using the configured block logger.
+     * Does nothing if there isn't one configured.
+     *
+     * @param player The Player that painted the block
+     * @param oldBlockState The BlockState of the block before it was painted
+     * @param newBlockState The BlockState of the block after it was painted
+     * @param block The Block itself, after it's been painted
+     */
     public void blockPainted(Player player, BlockState oldBlockState, BlockState newBlockState, Block block) {
         if (this.useLogger) {
             this.blockLogger.blockPainted(player, oldBlockState, newBlockState, block);
         }
     }
 
+    /**
+     * Send a message to a player, where the message has been defined in the
+     * plugin's <code>config.yml</code>.
+     *
+     * <p>
+     *
+     * The <code>args</code> map is used to replace tokens in the message. For example..
+     *
+     * <p>
+     *
+     * <code>
+     *     Map<String, String> args = new HashMap<>();<br/>
+     *     args.put("PERMISSION", "my.awesome.permission");
+     * </code>
+     *
+     * <p>
+     *
+     * This will replace <code>"{PERMISSION}"</code> in the message with
+     * <code>"my.awesome.permission"</code>.
+     *
+     * @param player The CommandSender (Console or Player) to send the message to.
+     * @param message The name of the message, as configured in <code>config.yml</code>.
+     * @param args A Map of arguments that will be replacing tokens in the message itself.
+     */
     public void sendMessage(CommandSender player, String message, Map<String, String> args) {
         String msg = this.getConfig().getString("messages.".concat(message));
 

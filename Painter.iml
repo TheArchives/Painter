@@ -15,14 +15,9 @@
     <orderEntry type="library" exported="" name="Gradle: prism-2.0.2" level="project" />
     <orderEntry type="library" exported="" name="Gradle: bukkit-1.7.9-R0.2" level="project" />
     <orderEntry type="library" exported="" name="Gradle: CoreProtect-2.0.9" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: logblock-dev-SNAPSHOT" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: worldedit-5.5" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: truezip-6.8.3" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: js-1.7R2" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: jchronic-0.2.4a" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: junit-4.8.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: Vault-1.4.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: HawkEye-1.6.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: unresolved_dependency___de_diddiz_logblock_dev_SNAPSHOT" level="project" />
   </component>
 </module>
 
