@@ -33,38 +33,36 @@ public class BlockBreakListener implements Listener {
      * Handles the blockBreakEvent for painting blocks in nearby-painting mode.
      * @param event The BlockBreakEvent to handle
      */
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onBlockBreakEvent(BlockBreakEvent event) {
-        if(! event.isCancelled()) {
-            Player player = event.getPlayer();
+        Player player = event.getPlayer();
 
-            if (this.plugin.isPainter(player.getUniqueId())) {
-                if (! this.plugin.hasPermission(player, "painter.replace")) {
-                    this.plugin.setPainter(player.getUniqueId(), false);
+        if (this.plugin.isPainter(player.getUniqueId())) {
+            if (! this.plugin.hasPermission(player, "painter.replace")) {
+                this.plugin.setPainter(player.getUniqueId(), false);
 
-                    Map<String, String> args = new HashMap<>();
-                    args.put("permission", "painter.replace");
-                    args.put("name", player.getName());
+                Map<String, String> args = new HashMap<>();
+                args.put("permission", "painter.replace");
+                args.put("name", player.getName());
 
-                    this.plugin.sendMessage(player, "replace_perm_lost", args);
-                    return;
-                }
+                this.plugin.sendMessage(player, "replace_perm_lost", args);
+                return;
+            }
 
-                ItemStack items = player.getItemInHand();
-                Material heldMat = items.getType();
+            ItemStack items = player.getItemInHand();
+            Material heldMat = items.getType();
 
-                if (heldMat.isBlock()) {
-                    Block block = event.getBlock();
-                    BlockState oldBlockState = block.getState();
+            if (heldMat.isBlock()) {
+                Block block = event.getBlock();
+                BlockState oldBlockState = block.getState();
 
-                    block.setType(heldMat);
-                    block.setData(items.getData().getData());
+                block.setType(heldMat);
+                block.setData(items.getData().getData());
 
-                    event.setCancelled(true);
+                event.setCancelled(true);
 
-                    // Log it if it's being logged
-                    this.plugin.blockPainted(player, oldBlockState, block.getState(), block);
-                }
+                // Log it if it's being logged
+                this.plugin.blockPainted(player, oldBlockState, block.getState(), block);
             }
         }
     }

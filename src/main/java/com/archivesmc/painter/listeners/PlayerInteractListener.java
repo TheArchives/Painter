@@ -34,7 +34,7 @@ public class PlayerInteractListener implements Listener {
      *
      * @param event The PlayerInteractEvent to handle
      */
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerInteractEvent(PlayerInteractEvent event) {
         Player player = event.getPlayer();
 
