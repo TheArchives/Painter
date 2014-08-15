@@ -40,8 +40,6 @@ public class PaintEventListener implements Listener {
             newBlockState.setData(items.getData());
             newBlockState.update();
 
-            event.setCancelled(true);
-
             // Log it if it's being logged
             this.plugin.blockPainted(player, oldBlockState, newBlockState, block);
         }
