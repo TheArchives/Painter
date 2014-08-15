@@ -12,7 +12,7 @@ import org.bukkit.plugin.Plugin;
 
 public class CoreprotectLogger implements BlockLogger {
 
-    private Painter plugin;
+    private final Painter plugin;
     private CoreProtectAPI api;
 
     public CoreprotectLogger(Painter plugin) {

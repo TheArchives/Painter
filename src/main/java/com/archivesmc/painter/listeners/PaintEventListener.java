@@ -18,7 +18,7 @@ import org.bukkit.inventory.ItemStack;
  */
 public class PaintEventListener implements Listener {
 
-    private Painter plugin;
+    private final Painter plugin;
 
     public PaintEventListener(Painter plugin) {
         this.plugin = plugin;

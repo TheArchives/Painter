@@ -16,7 +16,7 @@ import org.bukkit.plugin.Plugin;
 
 public class PrismLogger implements BlockLogger {
 
-    private Painter plugin;
+    private final Painter plugin;
 
     public PrismLogger(Painter plugin) {
         this.plugin = plugin;

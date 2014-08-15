@@ -4,7 +4,6 @@ import com.archivesmc.painter.Painter;
 import com.archivesmc.painter.events.PaintEvent;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -24,7 +23,7 @@ import java.util.Map;
  * ranged-painting mode.
  */
 public class PlayerInteractListener implements Listener {
-    Painter plugin;
+    private final Painter plugin;
 
     public PlayerInteractListener(Painter plugin) {
         this.plugin = plugin;

@@ -15,7 +15,7 @@ import uk.co.oliwali.HawkEye.util.HawkEyeAPI;
 
 public class HawkEyeLogger implements BlockLogger {
 
-    private Painter plugin;
+    private final Painter plugin;
 
     public HawkEyeLogger(Painter plugin) {
         this.plugin = plugin;

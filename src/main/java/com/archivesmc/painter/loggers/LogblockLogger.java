@@ -14,7 +14,7 @@ import org.bukkit.plugin.PluginManager;
 public class LogblockLogger implements BlockLogger {
 
     private Consumer consumer = null;
-    private Painter plugin;
+    private final Painter plugin;
 
     public LogblockLogger(Painter plugin) {
         this.plugin = plugin;

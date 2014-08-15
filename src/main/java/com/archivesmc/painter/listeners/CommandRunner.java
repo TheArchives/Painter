@@ -17,7 +17,7 @@ import java.util.UUID;
  * commands here.
  */
 public class CommandRunner implements CommandExecutor {
-    private Painter plugin;
+    private final Painter plugin;
 
     public CommandRunner(Painter plugin) {
         this.plugin = plugin;

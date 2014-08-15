@@ -1,8 +1,6 @@
 package com.archivesmc.painter.events;
 
-import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
@@ -10,7 +8,9 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * Created by bw5 on 30/07/2014.
+ * @author Gareth Coles
+ *
+ * Paint event. Fire this if you want to paint something.
  */
 public class PaintEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
