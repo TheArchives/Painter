@@ -33,10 +33,10 @@ public class PaintEventListener implements Listener {
         if (heldMat.isBlock()) {
             Block block = event.getBlock();
             BlockState oldBlockState = block.getState();
-            BlockState newBlockState = block.getState();
 
             block.setType(heldMat);
-            heldMat.getData();
+
+            BlockState newBlockState = block.getState();
             newBlockState.setData(items.getData());
             newBlockState.update();
 
