@@ -1,12 +1,11 @@
 name: Painter
-version: 0.0.1pre5
+version: 0.0.1
 description: Allows the painting of wool and clay, and the replacing of blocks
 
 author: Gareth Coles
 
 main: com.archivesmc.painter.Painter
 database: false
-depend: [Vault]
 softdepend: [LogBlock, CoreProtect, Prism, HawkEye]
 
 commands:

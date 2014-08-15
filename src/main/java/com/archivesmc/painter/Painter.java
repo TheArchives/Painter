@@ -6,12 +6,10 @@ import com.archivesmc.painter.listeners.PaintEventListener;
 import com.archivesmc.painter.listeners.PlayerInteractListener;
 import com.archivesmc.painter.loggers.*;
 
-import net.milkbowl.vault.permission.Permission;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
@@ -29,7 +27,6 @@ public class Painter extends JavaPlugin {
 
     private Set<UUID> painters;
     private Set<UUID> rangePainters;
-    private Permission permissions;
 
     /**
      * Called by Bukkit when the plugin is enabled.
@@ -83,13 +80,6 @@ public class Painter extends JavaPlugin {
         } else {
             // Might've been intentional, but log it anyway
             this.getLogger().info("No block logging is configured, so we won't be logging paints.");
-        }
-
-        // Next, let's set up permissions
-        if (! this.setupPermissions()) {
-            this.getLogger().warning("Unable to load permissions. Please make sure Vault is installed!");
-            getServer().getPluginManager().disablePlugin(this);
-            return;
         }
 
         // Now that that's done, let's register events and commands
@@ -211,14 +201,6 @@ public class Painter extends JavaPlugin {
         player.sendMessage(msg);
     }
 
-    private boolean setupPermissions() {
-        RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
-        if (permissionProvider != null) {
-            permissions = permissionProvider.getProvider();
-        }
-        return permissions != null;
-    }
-
     /**
      * Returns whether the player is in nearby-painting mode
      * @param player The UUID of the player to check
@@ -278,6 +260,6 @@ public class Painter extends JavaPlugin {
      * @return Whether the CommandSender has the specified permission
      */
     public boolean hasPermission(CommandSender sender, String permission) {
-        return this.permissions.has(sender, permission);
+        return sender.hasPermission(permission);
     }
 }
