@@ -24,7 +24,7 @@ public class PaintEventListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void paintEvent(PaintEvent event) {
         Player player = event.getPlayer();
         ItemStack items = event.getItem();
