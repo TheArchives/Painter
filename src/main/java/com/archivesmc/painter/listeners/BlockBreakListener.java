@@ -2,6 +2,7 @@ package com.archivesmc.painter.listeners;
 
 import com.archivesmc.painter.Painter;
 
+import com.archivesmc.painter.events.PaintEvent;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -53,16 +54,10 @@ public class BlockBreakListener implements Listener {
             Material heldMat = items.getType();
 
             if (heldMat.isBlock()) {
-                Block block = event.getBlock();
-                BlockState oldBlockState = block.getState();
-
-                block.setType(heldMat);
-                block.setData(items.getData().getData());
-
                 event.setCancelled(true);
 
-                // Log it if it's being logged
-                this.plugin.blockPainted(player, oldBlockState, block.getState(), block);
+                PaintEvent paintEvent = new PaintEvent(event.getPlayer(), items, event.getBlock());
+                this.plugin.getServer().getPluginManager().callEvent(paintEvent);
             }
         }
     }
