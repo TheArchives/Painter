@@ -2,6 +2,7 @@ package com.archivesmc.painter;
 
 import com.archivesmc.painter.listeners.BlockBreakListener;
 import com.archivesmc.painter.listeners.CommandRunner;
+import com.archivesmc.painter.listeners.PaintEventListener;
 import com.archivesmc.painter.listeners.PlayerInteractListener;
 import com.archivesmc.painter.loggers.*;
 
@@ -94,10 +95,12 @@ public class Painter extends JavaPlugin {
         // Now that that's done, let's register events and commands
         BlockBreakListener breakListener = new BlockBreakListener(this);
         PlayerInteractListener interactListener = new PlayerInteractListener(this);
+        PaintEventListener paintListener = new PaintEventListener(this);
         CommandRunner commands = new CommandRunner(this);
 
         this.getServer().getPluginManager().registerEvents(breakListener, this);
         this.getServer().getPluginManager().registerEvents(interactListener, this);
+        this.getServer().getPluginManager().registerEvents(paintListener, this);
         getCommand("painter").setExecutor(commands);
     }
 
