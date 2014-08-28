@@ -1,7 +1,7 @@
 Painter
 =======
 
-My plugins: [WordWarning](https://github.com/gdude2002/WordWarning) | **Painter**
+My plugins: [WordWarning](https://github.com/gdude2002/WordWarning) | **Painter** | [LotteryBox](https://github.com/gdude2002/LotteryBox)
 
 ---
 
@@ -54,4 +54,4 @@ into your local maven repository. Poms are generated in `build/poms/`.
 
 ---
 
-My plugins: [WordWarning](https://github.com/gdude2002/WordWarning) | **Painter**
+My plugins: [WordWarning](https://github.com/gdude2002/WordWarning) | **Painter** | [LotteryBox](https://github.com/gdude2002/LotteryBox)
