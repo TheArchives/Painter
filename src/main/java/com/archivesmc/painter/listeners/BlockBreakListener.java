@@ -4,6 +4,7 @@ import com.archivesmc.painter.Painter;
 
 import com.archivesmc.painter.events.PaintEvent;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -52,10 +53,12 @@ public class BlockBreakListener implements Listener {
             Material heldMat = items.getType();
 
             if (heldMat.isBlock()) {
-                event.setCancelled(true);
+                if (event.getBlock().getType() != heldMat) {
+                    event.setCancelled(true);
 
-                PaintEvent paintEvent = new PaintEvent(event.getPlayer(), items, event.getBlock());
-                this.plugin.getServer().getPluginManager().callEvent(paintEvent);
+                    PaintEvent paintEvent = new PaintEvent(event.getPlayer(), items, event.getBlock());
+                    this.plugin.getServer().getPluginManager().callEvent(paintEvent);
+                }
             }
         }
     }

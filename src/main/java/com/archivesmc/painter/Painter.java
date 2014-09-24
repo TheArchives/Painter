@@ -254,7 +254,7 @@ public class Painter extends JavaPlugin {
     }
 
     /**
-     * Uses vault to check whether a CommandSender has a certain permission
+     * Check whether a CommandSender has a certain permission
      * @param sender The Player or other CommandSender to check permissions for
      * @param permission The permissions to check for
      * @return Whether the CommandSender has the specified permission

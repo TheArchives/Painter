@@ -3,6 +3,7 @@
 .sonar
 build/
 bukkit/
+glowstone/
 lib/
 out/
 var/
