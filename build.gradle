@@ -5,7 +5,7 @@ apply plugin: 'maven'
 apply plugin: 'ivy-publish'
 
 sourceCompatibility = 1.7
-version = '0.0.1'
+version = '0.0.2'
 group = "com.archivesmc.painter"
 
 repositories {
