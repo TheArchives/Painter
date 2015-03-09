@@ -31,6 +31,11 @@ public class ArchBlockIntegration implements Integration {
         Plugin archBlockPlugin = this.plugin.getServer().getPluginManager().getPlugin("ArchBlock");
 
         if (archBlockPlugin != null && archBlockPlugin.isEnabled()) {
+            if (archBlockPlugin.getDescription().getVersion().equals("0.0.1")) {
+                this.plugin.getLogger().warning("ArchBlock integration requires ArchBlock version 0.0.2 or later");
+                return false;
+            }
+
             this.archBlockApi = ((com.archivesmc.archblock.Plugin) archBlockPlugin).getApi();
             return true;
         }

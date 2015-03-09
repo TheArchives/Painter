@@ -104,7 +104,7 @@ public class Painter extends JavaPlugin {
             this.getLogger().info("No block logging is configured, so we won't be logging paints.");
         }
 
-        // Alright, now let's load up the build restrictors
+        // Alright, now let's load up the integrations
         this.integrations = new ArrayList<>();
         Integration integration;
 
