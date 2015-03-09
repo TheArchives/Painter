@@ -1,13 +1,14 @@
 package com.archivesmc.painter;
 
+import com.archivesmc.painter.integrations.WorldGuardIntegration;
 import com.archivesmc.painter.listeners.BlockBreakListener;
 import com.archivesmc.painter.listeners.CommandRunner;
 import com.archivesmc.painter.listeners.PaintEventListener;
 import com.archivesmc.painter.listeners.PlayerInteractListener;
 import com.archivesmc.painter.loggers.*;
 
-import com.archivesmc.painter.restrictors.ArchBlockRestrictor;
-import com.archivesmc.painter.restrictors.BuildRestrictor;
+import com.archivesmc.painter.integrations.ArchBlockIntegration;
+import com.archivesmc.painter.integrations.Integration;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.command.CommandSender;
@@ -24,7 +25,7 @@ import static org.bukkit.ChatColor.translateAlternateColorCodes;
 public class Painter extends JavaPlugin {
 
     private BlockLogger blockLogger;
-    private List<BuildRestrictor> buildRestrictors;
+    private List<Integration> integrations;
 
     private boolean useLogger = false;
 
@@ -40,9 +41,20 @@ public class Painter extends JavaPlugin {
         this.saveDefaultConfig();
         this.reloadConfig();
 
+        // TODO: Make an actual config class for migrations and stuff
+
         if (this.getConfig().getString("version").equals("0.0.2")) {
+            // Upgrade to ArchBlock integration
             this.getConfig().set("messages.archblock_not_allowed", "&dCMP &5\u00BB&c You are not allowed to edit blocks owned by &d{NAME}");
             this.getConfig().set("version", "0.0.3");
+            this.saveConfig();
+            this.reloadConfig();
+        }
+
+        if (this.getConfig().getString("version").equals("0.0.3")) {
+            // Upgrade to WorldGuard integration
+            this.getConfig().set("messages.worldguard_not_allowed", "&dCMP &5\u00BB&c You are not allowed to edit blocks in that region");
+            this.getConfig().set("version", "0.0.3_1");
             this.saveConfig();
             this.reloadConfig();
         }
@@ -93,16 +105,30 @@ public class Painter extends JavaPlugin {
         }
 
         // Alright, now let's load up the build restrictors
-        this.buildRestrictors = new ArrayList<>();
-        BuildRestrictor restrictor;
+        this.integrations = new ArrayList<>();
+        Integration integration;
 
         if (this.getServer().getPluginManager().isPluginEnabled("ArchBlock")) {
-            // We have ArchBlock
-            restrictor = new ArchBlockRestrictor(this);
+            // We have ArchBlock enabled
+            integration = new ArchBlockIntegration(this);
 
-            if (restrictor.setUp()) {
-                this.buildRestrictors.add(restrictor);
-                this.getLogger().info("Integration enabled: ArchBlock");
+            if (integration.setUp()) {
+                this.integrations.add(integration);
+                this.getLogger().info(String.format(
+                        "Integration enabled: %s", integration.getPluginName()
+                ));
+            }
+        }
+
+        if (this.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
+            // We have WorldGuard enabled
+            integration = new WorldGuardIntegration(this);
+
+            if (integration.setUp()) {
+                this.integrations.add(integration);
+                this.getLogger().info(String.format(
+                        "Integration enabled: %s", integration.getPluginName()
+                ));
             }
         }
 
@@ -170,6 +196,10 @@ public class Painter extends JavaPlugin {
     public void blockPainted(Player player, BlockState oldBlockState, BlockState newBlockState, Block block) {
         if (this.useLogger) {
             this.blockLogger.blockPainted(player, oldBlockState, newBlockState, block);
+        }
+
+        for (Integration i : this.integrations) {
+            i.blockReplaced(block, player);
         }
     }
 
@@ -288,7 +318,7 @@ public class Painter extends JavaPlugin {
     }
 
     public boolean canEdit(Block block, Player player) {
-        for (BuildRestrictor r : this.buildRestrictors) {
+        for (Integration r : this.integrations) {
             if (! r.canEdit(block, player)) {
                 r.notifyNotAllowed(block, player);
                 return false;

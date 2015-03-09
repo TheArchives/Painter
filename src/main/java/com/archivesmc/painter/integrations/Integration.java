@@ -1,14 +1,12 @@
-package com.archivesmc.painter.restrictors;
+package com.archivesmc.painter.integrations;
 
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
-/**
- * Created by Gareth on 09/03/2015.
- */
-public interface BuildRestrictor {
+public interface Integration {
     public boolean canEdit(Block block, Player player);
     public String getPluginName();
     public boolean setUp();
     public void notifyNotAllowed(Block block, Player player);
+    public void blockReplaced(Block block, Player player);
 }

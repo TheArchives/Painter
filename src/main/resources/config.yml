@@ -31,5 +31,8 @@ messages:
     # Tokens: {NAME}
     archblock_not_allowed: "&dCMP &5\u00BB&c You are not allowed to edit blocks owned by &d{NAME}"
 
+    # Tokens: None
+    worldguard_not_allowed: "&dCMP &5»&c You are not allowed to edit blocks in that region"
+
 # Don't change this! You'll break stuff!
-version: 0.0.3
+version: 0.0.3_1

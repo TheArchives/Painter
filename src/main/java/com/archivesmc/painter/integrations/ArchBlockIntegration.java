@@ -1,4 +1,4 @@
-package com.archivesmc.painter.restrictors;
+package com.archivesmc.painter.integrations;
 
 import com.archivesmc.archblock.api.ArchBlock;
 import com.archivesmc.painter.Painter;
@@ -8,11 +8,11 @@ import org.bukkit.plugin.Plugin;
 
 import java.util.HashMap;
 
-public class ArchBlockRestrictor implements BuildRestrictor {
+public class ArchBlockIntegration implements Integration {
     private final Painter plugin;
     private ArchBlock archBlockApi;
 
-    public ArchBlockRestrictor(Painter plugin) {
+    public ArchBlockIntegration(Painter plugin) {
         this.plugin = plugin;
     }
 
@@ -51,5 +51,14 @@ public class ArchBlockRestrictor implements BuildRestrictor {
         );
 
         this.plugin.sendMessage(player, "archblock_not_allowed", args);
+    }
+
+    @Override
+    public void blockReplaced(Block block, Player player) {
+        if (this.archBlockApi.getOwnerUUID(block) != null) {
+            this.archBlockApi.removeOwner(block);
+        }
+
+        this.archBlockApi.setOwnerUUID(block, player.getUniqueId());
     }
 }
