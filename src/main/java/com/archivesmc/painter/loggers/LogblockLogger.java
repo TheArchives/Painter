@@ -2,6 +2,7 @@ package com.archivesmc.painter.loggers;
 
 import com.archivesmc.painter.Painter;
 
+import de.diddiz.LogBlock.Actor;
 import de.diddiz.LogBlock.Consumer;
 import de.diddiz.LogBlock.LogBlock;
 
@@ -22,7 +23,7 @@ public class LogblockLogger implements BlockLogger {
 
     @Override
     public void blockPainted(Player player, BlockState oldBlockState, BlockState newBlockState, Block block) {
-        this.consumer.queueBlockReplace(player.getName(), oldBlockState, newBlockState);
+        this.consumer.queueBlockReplace(Actor.actorFromEntity(player), oldBlockState, newBlockState);
     }
 
     @Override

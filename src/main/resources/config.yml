@@ -28,5 +28,8 @@ messages:
     # Tokens: {PERMISSION}, {NAME}
     command_range_replace_no_permission: "&dCMP &5\u00BB&6 You do not have permission to toggle range replace mode"
 
+    # Tokens: {NAME}
+    archblock_not_allowed: "&dCMP &5\u00BB&c You are not allowed to edit blocks owned by &d{NAME}"
+
 # Don't change this! You'll break stuff!
-version: 0.0.2
+version: 0.0.3

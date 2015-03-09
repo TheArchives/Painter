@@ -1,6 +1,7 @@
 .idea
 .gradle
 .sonar
+*.iml
 build/
 bukkit/
 glowstone/

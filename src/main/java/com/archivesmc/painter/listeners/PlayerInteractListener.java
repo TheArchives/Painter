@@ -58,6 +58,11 @@ public class PlayerInteractListener implements Listener {
             if (heldMat.isBlock()) {
                 Block block = player.getTargetBlock(null, 100);
 
+                if (! this.plugin.canEdit(block, player)) {
+                    event.setCancelled(true);
+                    return;
+                }
+
                 if (block == null) {
                     return;
                 }

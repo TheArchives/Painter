@@ -6,6 +6,8 @@ import com.archivesmc.painter.listeners.PaintEventListener;
 import com.archivesmc.painter.listeners.PlayerInteractListener;
 import com.archivesmc.painter.loggers.*;
 
+import com.archivesmc.painter.restrictors.ArchBlockRestrictor;
+import com.archivesmc.painter.restrictors.BuildRestrictor;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.command.CommandSender;
@@ -22,6 +24,7 @@ import static org.bukkit.ChatColor.translateAlternateColorCodes;
 public class Painter extends JavaPlugin {
 
     private BlockLogger blockLogger;
+    private List<BuildRestrictor> buildRestrictors;
 
     private boolean useLogger = false;
 
@@ -36,6 +39,13 @@ public class Painter extends JavaPlugin {
         // Save default config if it doesn't exist, and reload it in case the plugin's been reloaded
         this.saveDefaultConfig();
         this.reloadConfig();
+
+        if (this.getConfig().getString("version").equals("0.0.2")) {
+            this.getConfig().set("messages.archblock_not_allowed", "&dCMP &5\u00BB&c You are not allowed to edit blocks owned by &d{NAME}");
+            this.getConfig().set("version", "0.0.3");
+            this.saveConfig();
+            this.reloadConfig();
+        }
 
         // Assign painters set here in case we're reloading, instead of in the class definition
         this.painters = new HashSet<>();
@@ -80,6 +90,19 @@ public class Painter extends JavaPlugin {
         } else {
             // Might've been intentional, but log it anyway
             this.getLogger().info("No block logging is configured, so we won't be logging paints.");
+        }
+
+        // Alright, now let's load up the build restrictors
+        BuildRestrictor restrictor;
+
+        if (this.getServer().getPluginManager().isPluginEnabled("ArchBlock")) {
+            // We have ArchBlock
+            restrictor = new ArchBlockRestrictor(this);
+
+            if (restrictor.setUp()) {
+                this.buildRestrictors.add(restrictor);
+                this.getLogger().info("Integration enabled: ArchBlock");
+            }
         }
 
         // Now that that's done, let's register events and commands
@@ -261,5 +284,16 @@ public class Painter extends JavaPlugin {
      */
     public boolean hasPermission(CommandSender sender, String permission) {
         return sender.hasPermission(permission);
+    }
+
+    public boolean canEdit(Block block, Player player) {
+        for (BuildRestrictor r : this.buildRestrictors) {
+            if (! r.canEdit(block, player)) {
+                r.notifyNotAllowed(block, player);
+                return false;
+            }
+        }
+
+        return true;
     }
 }

@@ -49,6 +49,11 @@ public class BlockBreakListener implements Listener {
                 return;
             }
 
+            if (! this.plugin.canEdit(event.getBlock(), player)) {
+                event.setCancelled(true);
+                return;
+            }
+
             ItemStack items = player.getItemInHand();
             Material heldMat = items.getType();
 

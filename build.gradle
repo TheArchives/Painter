@@ -5,25 +5,17 @@ apply plugin: 'maven'
 apply plugin: 'ivy-publish'
 
 sourceCompatibility = 1.7
-version = '0.0.2'
+version = '0.0.3'
 group = "com.archivesmc.painter"
 
 repositories {
     flatDir {
-        // dirs '../lib', 'lib'
         dirs 'lib'
     }
     // Bukkit
     maven {
         url 'http://repo.bukkit.org/content/groups/public/'
     }
-
-    // Prism
-//    maven {
-//        // Blocked by most corporate (read: crap) firewalls
-//        // Also, horribly broken atm
-//        url 'http://dhmc.us:8081/nexus/content/repositories/public/'
-//    }
     // LogBlock
     maven {
         url 'http://repo.md-5.net/content/repositories/public/'
@@ -31,6 +23,10 @@ repositories {
     // WorldEdit (for LogBlock)
     maven {
         url 'http://maven.sk89q.com/repo/'
+    }
+    // ArchBlock
+    maven {
+        url 'http://cherry.gserv.me/repos/maven/'
     }
 }
 
@@ -113,4 +109,5 @@ dependencies {
     compile 'me.botsko:prism:2.0.2'
     compile 'org.bukkit:bukkit:1.7.9-R0.2'
     compile 'uk.co.oliwali:HawkEye:1.6.0'
+    compile 'com.archivesmc.archblock:ArchBlock:0.0.2'
 }
