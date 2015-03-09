@@ -93,6 +93,7 @@ public class Painter extends JavaPlugin {
         }
 
         // Alright, now let's load up the build restrictors
+        this.buildRestrictors = new ArrayList<>();
         BuildRestrictor restrictor;
 
         if (this.getServer().getPluginManager().isPluginEnabled("ArchBlock")) {
