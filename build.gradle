@@ -14,7 +14,7 @@ repositories {
     }
     // Bukkit
     maven {
-        url 'http://repo.bukkit.org/content/groups/public/'
+        url 'https://hub.spigotmc.org/nexus/content/groups/public/'
     }
     // LogBlock
     maven {
@@ -34,7 +34,7 @@ repositories {
     }
     // Vault (For ArchBlock)
     maven {
-        url "http://nexus.theyeticave.net/content/repositories/pub_releases"
+        url 'http://nexus.theyeticave.net/content/repositories/pub_releases'
     }
 }
 
