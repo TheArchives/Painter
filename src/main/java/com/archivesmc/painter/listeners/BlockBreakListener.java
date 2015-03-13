@@ -1,7 +1,6 @@
 package com.archivesmc.painter.listeners;
 
 import com.archivesmc.painter.Painter;
-
 import com.archivesmc.painter.events.PaintEvent;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -11,6 +10,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.Colorable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,14 +56,48 @@ public class BlockBreakListener implements Listener {
 
             ItemStack items = player.getItemInHand();
             Material heldMat = items.getType();
+            Block block = event.getBlock();
+
+            Colorable heldColorable;
+            Colorable blockColorable;
 
             if (heldMat.isBlock()) {
-                if (event.getBlock().getType() != heldMat) {
-                    event.setCancelled(true);
+                if (heldMat == Material.WOOL & block.getType() == Material.WOOL) {
+                    heldColorable = (Colorable) items.getData();
+                    blockColorable = (Colorable) block.getState().getData();
 
-                    PaintEvent paintEvent = new PaintEvent(event.getPlayer(), items, event.getBlock());
-                    this.plugin.getServer().getPluginManager().callEvent(paintEvent);
+                    if (heldColorable.getColor() == blockColorable.getColor()) {
+                        return;
+                    }
+                } else if (heldMat == Material.STAINED_CLAY & block.getType() == Material.STAINED_CLAY) {
+                    heldColorable = (Colorable) items.getData();
+                    blockColorable = (Colorable) block.getState().getData();
+
+                    if (heldColorable.getColor() == blockColorable.getColor()) {
+                        return;
+                    }
+                } else if (heldMat == Material.STAINED_GLASS & block.getType() == Material.STAINED_GLASS) {
+                    heldColorable = (Colorable) items.getData();
+                    blockColorable = (Colorable) block.getState().getData();
+
+                    if (heldColorable.getColor() == blockColorable.getColor()) {
+                        return;
+                    }
+                } else if (heldMat == Material.STAINED_GLASS_PANE & block.getType() == Material.STAINED_GLASS_PANE) {
+                    heldColorable = (Colorable) items.getData();
+                    blockColorable = (Colorable) block.getState().getData();
+
+                    if (heldColorable.getColor() == blockColorable.getColor()) {
+                        return;
+                    }
+                } else if (event.getBlock().getType() != heldMat) {
+                    return;
                 }
+
+                event.setCancelled(true);
+
+                PaintEvent paintEvent = new PaintEvent(event.getPlayer(), items, event.getBlock());
+                this.plugin.getServer().getPluginManager().callEvent(paintEvent);
             }
         }
     }
