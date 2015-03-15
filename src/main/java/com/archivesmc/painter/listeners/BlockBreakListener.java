@@ -90,7 +90,7 @@ public class BlockBreakListener implements Listener {
                     if (heldColorable.getColor() == blockColorable.getColor()) {
                         return;
                     }
-                } else if (event.getBlock().getType() != heldMat) {
+                } else if (event.getBlock().getType() == heldMat) {
                     return;
                 }
 
