@@ -117,5 +117,5 @@ dependencies {
     compile 'me.botsko:prism:2.0.2'
     compile 'org.bukkit:bukkit:1.7.9-R0.2'
     compile 'uk.co.oliwali:HawkEye:1.6.0'
-    compile 'com.archivesmc.archblock:ArchBlock:0.0.2'
+    compile 'com.archivesmc.archblock:ArchBlock:0.1.0b'
 }
