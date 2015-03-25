@@ -32,7 +32,14 @@ messages:
     archblock_not_allowed: "&dCMP &5\u00BB&c You are not allowed to edit blocks owned by &d{NAME}"
 
     # Tokens: None
-    worldguard_not_allowed: "&dCMP &5»&c You are not allowed to edit blocks in that region"
+    worldguard_not_allowed: "&dCMP &5\u00BB&c You are not allowed to edit blocks in that region"
+
+    # Tokens: {NAME}, {CREATOR}
+    redprotect_not_allowed: "&dCMP &5\u00BB&c You are not allowed to edit blocks in region &d"{NAME}"&c (created by &d{CREATOR}&c)"
+
+    # Tokens: {NAME}, {OWNER}
+    plotme_not_allowed: "&dCMP &5\u00BB&c You are not allowed to edit blocks in plot &d"{NAME}"&c (owned by &d{OWNER}&c)"
+
 
 # Don't change this! You'll break stuff!
-version: 0.0.3_1
+version: 0.0.4

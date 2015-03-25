@@ -1,42 +1,106 @@
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'build-announcements'
-apply plugin: 'maven'
-apply plugin: 'ivy-publish'
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'de.undercouch:gradle-download-task:1.2'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'findbugs'
+    id 'com.github.johnrengelman.shadow' version '1.2.0'
+    id "de.undercouch.download" version "1.2"
+    id 'maven-publish'
+    id 'ivy-publish'
+}
 
 sourceCompatibility = 1.7
-version = '0.0.3_2'
+version = '0.0.4'
 group = "com.archivesmc.painter"
 
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
 repositories {
-    flatDir {
-        dirs 'lib'
-    }
-    // Bukkit
+    mavenCentral()
+
+    // Spigot
     maven {
-        url 'https://hub.spigotmc.org/nexus/content/groups/public/'
+        url "https://hub.spigotmc.org/nexus/content/groups/public/"
+        name "Spigot"
     }
+
     // LogBlock
     maven {
         url 'http://repo.md-5.net/content/repositories/public/'
+        name "md-5"
     }
+
+    // Prism
+    maven {
+        url 'http://dhmc.us:8081/nexus/content/repositories/public/'
+        name "prism"
+    }
+
     // WorldEdit (for LogBlock)
     maven {
         url 'http://maven.sk89q.com/repo/'
+        name "sk89q"
     }
+
     // ArchBlock
     maven {
         url 'http://cherry.gserv.me/repos/maven/'
+        name "gserv.me"
     }
+
     // WGCustomFlags (For ArchBlock)
     maven {
         url 'http://maven.mewin.de/'
+        name "mewin"
     }
+
     // Vault (For ArchBlock)
     maven {
         url 'http://nexus.theyeticave.net/content/repositories/pub_releases'
+        name "vault"
+    }
+
+    // WorldGuard
+    maven {
+        url "http://maven.sk89q.com/artifactory/repo/"
+        name "sk89q"
     }
 }
+
+publishing {
+    publications {
+        ivyJava(IvyPublication) {
+            from components.java
+        }
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        ivy {
+            url "/var/www/gserv/cherry/repos/ivy/"
+        }
+
+        maven {
+            url "/var/www/gserv/cherry/repos/maven/"
+        }
+    }
+}
+
+defaultTasks 'clean', 'jar'
 
 jar {
     from sourceSets.main.allJava
@@ -47,75 +111,49 @@ artifacts {
     archives jar
 }
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            pom.artifactId = "Painter"
-            repository(url: "file://localhost/var/www/gserv/cherry/repos/maven/")
-        }
-    }
-}
-
-publishing {
-    publications {
-        ivyJava(IvyPublication) {
-            from components.java
-            module "Painter"
-        }
-    }
-    repositories {
-        ivy {
-            name "publish"
-            url "/var/www/gserv/cherry/repos/ivy/"
-        }
-    }
-}
-
 gradle.projectsEvaluated {
     tasks.withType(JavaCompile) {
         options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
     }
 }
 
-// Create lib folder
-def libDir = new File('lib')
-libDir.mkdirs()
+// Download CoreProtect
 
-// Download prism (lol)
-
-def f = new File('lib/prism-2.0.2.jar')
-if (!f.exists()) {
-    logger.info('Downloading dependency: prism-2.0.2.jar')
-    new URL('http://dhmc.us:8081/nexus/content/repositories/public/me/botsko/prism/2.0.2/prism-2.0.2.jar').withInputStream{ i -> f.withOutputStream{ it << i }}
-} else {
-    logger.info('Dependency already exists: prism-2.0.2.jar')
-}
-
-// Download CoreProtect as well
-
-def g = new File('lib/CoreProtect-2.0.9.jar') // Notice I used a dash here instead of an underscore
-if (!g.exists()) {
-    logger.info('Downloading dependency: CoreProtect-2.0.9.jar')
-    new URL('http://dev.bukkit.org/media/files/775/489/CoreProtect_2.0.9.jar').withInputStream{ i -> g.withOutputStream{ it << i }}
-} else {
-    logger.info('Dependency already exists: CoreProtect-2.0.9.jar')
+download {
+    src 'http://dev.bukkit.org/media/files/820/756/CoreProtect_2.10.0.jar'
+    dest 'lib/CoreProtect.jar'
 }
 
 // Download HawkEye
 
-def h = new File('lib/HawkEye-1.6.0.jar') // Devs don't include the version for some reason
-if (!h.exists()) {
-    logger.info('Downloading dependency: HawkEye-1.6.0.jar')
-    new URL('http://dev.bukkit.org/media/files/731/750/HawkEye.jar').withInputStream{ i -> h.withOutputStream{ it << i }}
-} else {
-    logger.info('Dependency already exists: HawkEye-1.6.0.jar')
+download {
+    src 'http://dev.bukkit.org/media/files/731/750/HawkEye.jar'
+    dest 'lib/HawkEye.jar'
+}
+
+// Download RedProtect
+
+download {
+    src 'http://dev.bukkit.org/media/files/871/297/RedProtect.jar'
+    dest 'lib/RedProtect.jar'
+}
+
+// Download PlotMe. These guys have no idea how maven repos should be done, apparently.
+
+download {
+    src 'http://ci.worldcretornica.com:8080/job/PlotMe-Core/137/artifact/target/PlotMe-Core.jar'
+    dest 'lib/PlotMe-Core.jar'
 }
 
 dependencies {
-    compile 'net.coreprotect:CoreProtect:2.0.9'
     compile 'de.diddiz:logblock:dev-SNAPSHOT'
-    compile 'me.botsko:prism:2.0.2'
+    compile 'me.botsko:prism:2.0.4'
     compile 'org.bukkit:bukkit:1.7.9-R0.2'
-    compile 'uk.co.oliwali:HawkEye:1.6.0'
     compile 'com.archivesmc.archblock:ArchBlock:0.1.0b'
+    compile "com.sk89q:worldguard:6.0.0-SNAPSHOT"
+
+    compile files('lib/CoreProtect.jar')
+    compile files('lib/HawkEye.jar')
+    compile files('lib/RedProtect.jar')
+    compile files('lib/PlotMe-Core.jar')
 }

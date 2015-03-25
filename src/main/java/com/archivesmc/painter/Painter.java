@@ -1,14 +1,12 @@
 package com.archivesmc.painter;
 
-import com.archivesmc.painter.integrations.WorldGuardIntegration;
+import com.archivesmc.painter.integrations.*;
 import com.archivesmc.painter.listeners.BlockBreakListener;
 import com.archivesmc.painter.listeners.CommandRunner;
 import com.archivesmc.painter.listeners.PaintEventListener;
 import com.archivesmc.painter.listeners.PlayerInteractListener;
 import com.archivesmc.painter.loggers.*;
 
-import com.archivesmc.painter.integrations.ArchBlockIntegration;
-import com.archivesmc.painter.integrations.Integration;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.command.CommandSender;
@@ -55,6 +53,21 @@ public class Painter extends JavaPlugin {
             // Upgrade to WorldGuard integration
             this.getConfig().set("messages.worldguard_not_allowed", "&dCMP &5\u00BB&c You are not allowed to edit blocks in that region");
             this.getConfig().set("version", "0.0.3_1");
+            this.saveConfig();
+            this.reloadConfig();
+        }
+
+        if (this.getConfig().getString("version").equals("0.0.3_1")) {
+            this.getConfig().set("version", "0.0.3_2");
+            this.saveConfig();
+            this.reloadConfig();
+        }
+
+        if (this.getConfig().getString("version").equals("0.0.3_2")) {
+            // Upgrade to RedProtect and PlotMe integration
+            this.getConfig().set("messages.redprotect_not_allowed", "&dCMP &5\u00BB&c You are not allowed to edit blocks in region &d\"{NAME}\"&c (created by &d{CREATOR}&c)");
+            this.getConfig().set("messages.plotme_not_allowed", "&dCMP &5\u00BB&c You are not allowed to edit blocks in plot &d\"{NAME}\"&c (owned by &d{OWNER}&c)");
+            this.getConfig().set("version", "0.0.4");
             this.saveConfig();
             this.reloadConfig();
         }
@@ -123,6 +136,30 @@ public class Painter extends JavaPlugin {
         if (this.getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
             // We have WorldGuard enabled
             integration = new WorldGuardIntegration(this);
+
+            if (integration.setUp()) {
+                this.integrations.add(integration);
+                this.getLogger().info(String.format(
+                        "Integration enabled: %s", integration.getPluginName()
+                ));
+            }
+        }
+
+        if (this.getServer().getPluginManager().isPluginEnabled("RedProtect")) {
+            // We have RedProtect enabled
+            integration = new RedProtectIntegration(this);
+
+            if (integration.setUp()) {
+                this.integrations.add(integration);
+                this.getLogger().info(String.format(
+                        "Integration enabled: %s", integration.getPluginName()
+                ));
+            }
+        }
+
+        if (this.getServer().getPluginManager().isPluginEnabled("PlotMe")) {
+            // We have PlotMe enabled
+            integration = new PlotMeIntegration(this);
 
             if (integration.setUp()) {
                 this.integrations.add(integration);
