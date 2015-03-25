@@ -16,7 +16,6 @@ import java.util.Map;
 
 public class PlotMeIntegration implements Integration {
     private final Painter plugin;
-    private PlotMe_CorePlugin plotMePlugin;
 
     public PlotMeIntegration(Painter plugin) {
         this.plugin = plugin;
@@ -41,12 +40,8 @@ public class PlotMeIntegration implements Integration {
     public boolean setUp() {
         Plugin plotMePlugin = this.plugin.getServer().getPluginManager().getPlugin("PlotMe");
 
-        if (plotMePlugin != null && plotMePlugin.isEnabled()) {
-            this.plotMePlugin = (PlotMe_CorePlugin) plotMePlugin;
-            return true;
-        }
+        return plotMePlugin != null && plotMePlugin.isEnabled();
 
-        return false;
     }
 
     @Override

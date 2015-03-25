@@ -62,28 +62,28 @@ public class BlockBreakListener implements Listener {
             Colorable blockColorable;
 
             if (heldMat.isBlock()) {
-                if (heldMat == Material.WOOL & block.getType() == Material.WOOL) {
+                if (heldMat == Material.WOOL && block.getType() == Material.WOOL) {
                     heldColorable = (Colorable) items.getData();
                     blockColorable = (Colorable) block.getState().getData();
 
                     if (heldColorable.getColor() == blockColorable.getColor()) {
                         return;
                     }
-                } else if (heldMat == Material.STAINED_CLAY & block.getType() == Material.STAINED_CLAY) {
+                } else if (heldMat == Material.STAINED_CLAY && block.getType() == Material.STAINED_CLAY) {
                     heldColorable = (Colorable) items.getData();
                     blockColorable = (Colorable) block.getState().getData();
 
                     if (heldColorable.getColor() == blockColorable.getColor()) {
                         return;
                     }
-                } else if (heldMat == Material.STAINED_GLASS & block.getType() == Material.STAINED_GLASS) {
+                } else if (heldMat == Material.STAINED_GLASS && block.getType() == Material.STAINED_GLASS) {
                     heldColorable = (Colorable) items.getData();
                     blockColorable = (Colorable) block.getState().getData();
 
                     if (heldColorable.getColor() == blockColorable.getColor()) {
                         return;
                     }
-                } else if (heldMat == Material.STAINED_GLASS_PANE & block.getType() == Material.STAINED_GLASS_PANE) {
+                } else if (heldMat == Material.STAINED_GLASS_PANE && block.getType() == Material.STAINED_GLASS_PANE) {
                     heldColorable = (Colorable) items.getData();
                     blockColorable = (Colorable) block.getState().getData();
 
