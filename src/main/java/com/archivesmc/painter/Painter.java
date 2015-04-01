@@ -230,12 +230,13 @@ public class Painter extends JavaPlugin {
      * @param newBlockState The BlockState of the block after it was painted
      * @param block The Block itself, after it's been painted
      */
-    public void blockPainted(Player player, BlockState oldBlockState, BlockState newBlockState, Block block) {
+    public void blockPainted(final Player player, final BlockState oldBlockState,
+                             final BlockState newBlockState, final Block block) {
         if (this.useLogger) {
             this.blockLogger.blockPainted(player, oldBlockState, newBlockState, block);
         }
 
-        for (Integration i : this.integrations) {
+        for (final Integration i : this.integrations) {
             i.blockReplaced(block, player);
         }
     }
@@ -264,7 +265,7 @@ public class Painter extends JavaPlugin {
      * @param message The name of the message, as configured in <code>config.yml</code>.
      * @param args A Map of arguments that will be replacing tokens in the message itself.
      */
-    public void sendMessage(CommandSender player, String message, Map<String, String> args) {
+    public void sendMessage(final CommandSender player, final String message, final Map<String, String> args) {
         String msg = this.getConfig().getString("messages.".concat(message));
 
         if (msg == null) {
@@ -280,12 +281,8 @@ public class Painter extends JavaPlugin {
 
         if (args != null) {
             // Not all messages have tokens
-            for (String key : args.keySet()) {
-                String origKey = key;
-                key = key.toUpperCase();
-                key = String.format("{%s}", key);
-
-                msg = msg.replace(key, args.get(origKey));
+            for (final Map.Entry<String, String> entry : args.entrySet()) {
+                msg = msg.replace(String.format("{%s}", entry.getKey().toUpperCase()), entry.getValue());
             }
         }
         msg = translateAlternateColorCodes('&', msg);
@@ -297,7 +294,7 @@ public class Painter extends JavaPlugin {
      * @param player The UUID of the player to check
      * @return Whether the player is in nearby-painting mode
      */
-    public boolean isPainter(UUID player) {
+    public boolean isPainter(final UUID player) {
         return this.painters.contains(player);
     }
 
@@ -306,7 +303,7 @@ public class Painter extends JavaPlugin {
      * @param player The UUID of the player to check
      * @param set Whether the player should be set to nearby-painting mode or not
      */
-    public void setPainter(UUID player, boolean set) {
+    public void setPainter(final UUID player, boolean set) {
         if (set) {
             if (! this.painters.contains(player)) {
                 this.painters.add(player);
@@ -323,7 +320,7 @@ public class Painter extends JavaPlugin {
      * @param player The UUID of the player to check
      * @return Whether the player is in range-painting mode
      */
-    public boolean isRangePainter(UUID player) {
+    public boolean isRangePainter(final UUID player) {
         return this.rangePainters.contains(player);
     }
 
@@ -332,7 +329,7 @@ public class Painter extends JavaPlugin {
      * @param player The UUID of the player to check
      * @param set Whether the player should be set to range-painting mode or not
      */
-    public void setRangePainter(UUID player, boolean set) {
+    public void setRangePainter(final UUID player, boolean set) {
         if (set) {
             if (! this.rangePainters.contains(player)) {
                 this.rangePainters.add(player);
@@ -350,12 +347,12 @@ public class Painter extends JavaPlugin {
      * @param permission The permissions to check for
      * @return Whether the CommandSender has the specified permission
      */
-    public boolean hasPermission(CommandSender sender, String permission) {
+    public boolean hasPermission(final CommandSender sender, final String permission) {
         return sender.hasPermission(permission);
     }
 
-    public boolean canEdit(Block block, Player player) {
-        for (Integration r : this.integrations) {
+    public boolean canEdit(final Block block, final Player player) {
+        for (final Integration r : this.integrations) {
             if (! r.canEdit(block, player)) {
                 r.notifyNotAllowed(block, player);
                 return false;

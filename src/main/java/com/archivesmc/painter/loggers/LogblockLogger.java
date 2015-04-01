@@ -17,12 +17,13 @@ public class LogblockLogger implements BlockLogger {
     private Consumer consumer = null;
     private final Painter plugin;
 
-    public LogblockLogger(Painter plugin) {
+    public LogblockLogger(final Painter plugin) {
         this.plugin = plugin;
     }
 
     @Override
-    public void blockPainted(Player player, BlockState oldBlockState, BlockState newBlockState, Block block) {
+    public void blockPainted(final Player player, final BlockState oldBlockState,
+                             final BlockState newBlockState, final Block block) {
         this.consumer.queueBlockReplace(Actor.actorFromEntity(player), oldBlockState, newBlockState);
     }
 

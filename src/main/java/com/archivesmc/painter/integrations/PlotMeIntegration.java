@@ -4,7 +4,6 @@ import com.archivesmc.painter.Painter;
 import com.worldcretornica.plotme_core.Plot;
 import com.worldcretornica.plotme_core.PlotMeCoreManager;
 import com.worldcretornica.plotme_core.api.ILocation;
-import com.worldcretornica.plotme_core.bukkit.PlotMe_CorePlugin;
 import com.worldcretornica.plotme_core.bukkit.api.BukkitLocation;
 import com.worldcretornica.plotme_core.bukkit.api.BukkitWorld;
 import org.bukkit.block.Block;
@@ -17,12 +16,12 @@ import java.util.Map;
 public class PlotMeIntegration implements Integration {
     private final Painter plugin;
 
-    public PlotMeIntegration(Painter plugin) {
+    public PlotMeIntegration(final Painter plugin) {
         this.plugin = plugin;
     }
 
     @Override
-    public boolean canEdit(Block block, Player player) {
+    public boolean canEdit(final Block block, final Player player) {
         // This API is pretty silly
         PlotMeCoreManager manager = PlotMeCoreManager.getInstance();
         ILocation location = new BukkitLocation(block.getLocation());
@@ -45,7 +44,7 @@ public class PlotMeIntegration implements Integration {
     }
 
     @Override
-    public void notifyNotAllowed(Block block, Player player) {
+    public void notifyNotAllowed(final Block block, final Player player) {
         // This API is pretty silly
         PlotMeCoreManager manager = PlotMeCoreManager.getInstance();
         ILocation location = new BukkitLocation(block.getLocation());
@@ -60,7 +59,7 @@ public class PlotMeIntegration implements Integration {
     }
 
     @Override
-    public void blockReplaced(Block block, Player player) {
+    public void blockReplaced(final Block block, final Player player) {
         // Honey badger don't care
     }
 }

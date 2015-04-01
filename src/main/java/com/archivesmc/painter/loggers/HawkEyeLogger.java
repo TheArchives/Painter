@@ -17,12 +17,13 @@ public class HawkEyeLogger implements BlockLogger {
 
     private final Painter plugin;
 
-    public HawkEyeLogger(Painter plugin) {
+    public HawkEyeLogger(final Painter plugin) {
         this.plugin = plugin;
     }
 
     @Override
-    public void blockPainted(Player player, BlockState oldBlockState, BlockState newBlockState, Block block) {
+    public void blockPainted(final Player player, final BlockState oldBlockState,
+                             final BlockState newBlockState, final Block block) {
         HawkEyeAPI.addEntry(
                 this.plugin,
                 new BlockEntry(

@@ -20,7 +20,7 @@ public class PaintEvent extends Event implements Cancellable {
     private Block block;
     private ItemStack item;
 
-    public PaintEvent(Player player, ItemStack item, Block block) {
+    public PaintEvent(final Player player, final ItemStack item, final Block block) {
         super();
 
         this.player = player;
@@ -34,7 +34,7 @@ public class PaintEvent extends Event implements Cancellable {
     }
 
     @Override
-    public void setCancelled(boolean cancel) {
+    public void setCancelled(final boolean cancel) {
         this.cancelled = cancel;
     }
 
@@ -53,7 +53,7 @@ public class PaintEvent extends Event implements Cancellable {
         return player;
     }
 
-    public void setPlayer(Player player) {
+    public void setPlayer(final Player player) {
         this.player = player;
     }
 
@@ -61,7 +61,7 @@ public class PaintEvent extends Event implements Cancellable {
         return item;
     }
 
-    public void setItem(ItemStack item) {
+    public void setItem(final ItemStack item) {
         this.item = item;
     }
 
@@ -69,7 +69,7 @@ public class PaintEvent extends Event implements Cancellable {
         return block;
     }
 
-    public void setBlock(Block block) {
+    public void setBlock(final Block block) {
         this.block = block;
     }
 }

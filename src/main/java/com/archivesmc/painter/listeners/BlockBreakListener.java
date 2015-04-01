@@ -25,7 +25,7 @@ public class BlockBreakListener implements Listener {
 
     private final Painter plugin;
 
-    public BlockBreakListener(Painter plugin) {
+    public BlockBreakListener(final Painter plugin) {
         this.plugin = plugin;
     }
 
@@ -34,7 +34,7 @@ public class BlockBreakListener implements Listener {
      * @param event The BlockBreakEvent to handle
      */
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-    public void onBlockBreakEvent(BlockBreakEvent event) {
+    public void onBlockBreakEvent(final BlockBreakEvent event) {
         Player player = event.getPlayer();
 
         if (this.plugin.isPainter(player.getUniqueId())) {

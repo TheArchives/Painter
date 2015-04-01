@@ -25,7 +25,7 @@ import java.util.Map;
 public class PlayerInteractListener implements Listener {
     private final Painter plugin;
 
-    public PlayerInteractListener(Painter plugin) {
+    public PlayerInteractListener(final Painter plugin) {
         this.plugin = plugin;
     }
 
@@ -35,7 +35,7 @@ public class PlayerInteractListener implements Listener {
      * @param event The PlayerInteractEvent to handle
      */
     @EventHandler(priority = EventPriority.HIGH)
-    public void onPlayerInteractEvent(PlayerInteractEvent event) {
+    public void onPlayerInteractEvent(final PlayerInteractEvent event) {
         Player player = event.getPlayer();
 
         if (this.plugin.isRangePainter(player.getUniqueId()) &&

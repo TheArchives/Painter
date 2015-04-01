@@ -2,8 +2,6 @@ package com.archivesmc.painter.integrations;
 
 import com.archivesmc.painter.Painter;
 import com.sk89q.worldedit.Vector;
-import com.sk89q.worldguard.LocalPlayer;
-import com.sk89q.worldguard.bukkit.BukkitUtil;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
@@ -19,12 +17,12 @@ public class WorldGuardIntegration implements Integration {
     private final Painter plugin;
     private WorldGuardPlugin worldGuardPlugin;
 
-    public WorldGuardIntegration(Painter plugin) {
+    public WorldGuardIntegration(final Painter plugin) {
         this.plugin = plugin;
     }
 
     @Override
-    public boolean canEdit(Block block, Player player) {
+    public boolean canEdit(final Block block, final Player player) {
         Vector point = toVector(block);
         RegionManager regionManager = this.worldGuardPlugin.getRegionManager(block.getWorld());
         ApplicableRegionSet set = regionManager.getApplicableRegions(point);
@@ -50,7 +48,7 @@ public class WorldGuardIntegration implements Integration {
     }
 
     @Override
-    public void notifyNotAllowed(Block block, Player player) {
+    public void notifyNotAllowed(final Block block, final Player player) {
         HashMap <String, String> args = new HashMap<>();
 
         args.put(
@@ -61,7 +59,7 @@ public class WorldGuardIntegration implements Integration {
     }
 
     @Override
-    public void blockReplaced(Block block, Player player) {
+    public void blockReplaced(final Block block, final Player player) {
         // Honey badger don't care
     }
 }

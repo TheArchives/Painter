@@ -20,12 +20,12 @@ public class PaintEventListener implements Listener {
 
     private final Painter plugin;
 
-    public PaintEventListener(Painter plugin) {
+    public PaintEventListener(final Painter plugin) {
         this.plugin = plugin;
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void paintEvent(PaintEvent event) {
+    public void paintEvent(final PaintEvent event) {
         Player player = event.getPlayer();
         ItemStack items = event.getItem();
         Material heldMat = items.getType();

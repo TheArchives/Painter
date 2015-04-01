@@ -3,7 +3,6 @@ package com.archivesmc.painter.integrations;
 import com.OverCaste.plugin.RedProtect.API.RedProtectAPI;
 import com.OverCaste.plugin.RedProtect.Region;
 import com.archivesmc.painter.Painter;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -14,12 +13,12 @@ import java.util.Map;
 public class RedProtectIntegration implements Integration {
     private final Painter plugin;
 
-    public RedProtectIntegration(Painter plugin) {
+    public RedProtectIntegration(final Painter plugin) {
         this.plugin = plugin;
     }
 
     @Override
-    public boolean canEdit(Block block, Player player) {
+    public boolean canEdit(final Block block, final Player player) {
         Region region = RedProtectAPI.getRegion(block.getLocation());
 
         return region.canBuild(player);
@@ -38,7 +37,7 @@ public class RedProtectIntegration implements Integration {
     }
 
     @Override
-    public void notifyNotAllowed(Block block, Player player) {
+    public void notifyNotAllowed(final Block block, final Player player) {
         Region region = RedProtectAPI.getRegion(block.getLocation());
 
         Map<String, String> args = new HashMap<>();
@@ -50,7 +49,7 @@ public class RedProtectIntegration implements Integration {
     }
 
     @Override
-    public void blockReplaced(Block block, Player player) {
+    public void blockReplaced(final Block block, final Player player) {
         // Honey badger don't care
     }
 }

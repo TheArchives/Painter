@@ -15,12 +15,13 @@ public class CoreprotectLogger implements BlockLogger {
     private final Painter plugin;
     private CoreProtectAPI api;
 
-    public CoreprotectLogger(Painter plugin) {
+    public CoreprotectLogger(final Painter plugin) {
         this.plugin = plugin;
     }
 
     @Override
-    public void blockPainted(Player player, BlockState oldBlockState, BlockState newBlockState, Block block) {
+    public void blockPainted(final Player player, final BlockState oldBlockState,
+                             final BlockState newBlockState, final Block block) {
         this.api.logRemoval(player.getName(), oldBlockState.getLocation(), oldBlockState.getTypeId(), oldBlockState.getData().getData());
         this.api.logPlacement(player.getName(), newBlockState.getLocation(), newBlockState.getTypeId(), newBlockState.getData().getData());
     }

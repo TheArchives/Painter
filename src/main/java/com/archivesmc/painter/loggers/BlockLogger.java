@@ -15,7 +15,8 @@ public interface BlockLogger {
      * @param newBlockState The BlockState of the block after it was painted
      * @param block The Block itself, after it's been painted
      */
-    public void blockPainted(Player player, BlockState oldBlockState, BlockState newBlockState, Block block);
+    public void blockPainted(final Player player, final BlockState oldBlockState,
+                             final BlockState newBlockState, final Block block);
 
     /**
      * Return the name of the block logging plugin in a proper, human-readable format.

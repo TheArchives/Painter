@@ -19,7 +19,7 @@ import java.util.UUID;
 public class CommandRunner implements CommandExecutor {
     private final Painter plugin;
 
-    public CommandRunner(Painter plugin) {
+    public CommandRunner(final Painter plugin) {
         this.plugin = plugin;
     }
 
@@ -32,7 +32,8 @@ public class CommandRunner implements CommandExecutor {
      * @return Whether this plugin has implemented the command or not
      */
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+    public boolean onCommand(final CommandSender commandSender, final Command command,
+                             final String s, final String[] strings) {
         if ("painter".equalsIgnoreCase(command.getLabel())) {
             if (!(commandSender instanceof Player)) {
                 Map<String, String> args = new HashMap<>();

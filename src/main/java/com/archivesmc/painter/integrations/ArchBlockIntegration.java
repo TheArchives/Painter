@@ -12,12 +12,12 @@ public class ArchBlockIntegration implements Integration {
     private final Painter plugin;
     private ArchBlock archBlockApi;
 
-    public ArchBlockIntegration(Painter plugin) {
+    public ArchBlockIntegration(final Painter plugin) {
         this.plugin = plugin;
     }
 
     @Override
-    public boolean canEdit(Block block, Player player) {
+    public boolean canEdit(final Block block, final Player player) {
         return this.archBlockApi.canEditBlock(block, player);
     }
 
@@ -44,7 +44,7 @@ public class ArchBlockIntegration implements Integration {
     }
 
     @Override
-    public void notifyNotAllowed(Block block, Player player) {
+    public void notifyNotAllowed(final Block block, final Player player) {
         HashMap <String, String> args = new HashMap<>();
 
         args.put(
@@ -59,7 +59,7 @@ public class ArchBlockIntegration implements Integration {
     }
 
     @Override
-    public void blockReplaced(Block block, Player player) {
+    public void blockReplaced(final Block block, final Player player) {
         if (this.archBlockApi.getOwnerUUID(block) != null) {
             this.archBlockApi.removeOwner(block);
         }

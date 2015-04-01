@@ -18,12 +18,13 @@ public class PrismLogger implements BlockLogger {
 
     private final Painter plugin;
 
-    public PrismLogger(Painter plugin) {
+    public PrismLogger(final Painter plugin) {
         this.plugin = plugin;
     }
 
     @Override
-    public void blockPainted(Player player, BlockState oldBlockState, BlockState newBlockState, Block block) {
+    public void blockPainted(final Player player, final BlockState oldBlockState,
+                             final BlockState newBlockState, final Block block) {
         Handler paintAction = ActionFactory.createBlockChange("painter-block-paint",
                 oldBlockState.getLocation(), oldBlockState.getTypeId(), oldBlockState.getRawData(),
                 newBlockState.getTypeId(), newBlockState.getRawData(), player.getName()
