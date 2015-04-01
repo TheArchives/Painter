@@ -35,10 +35,10 @@ messages:
     worldguard_not_allowed: "&dCMP &5\u00BB&c You are not allowed to edit blocks in that region"
 
     # Tokens: {NAME}, {CREATOR}
-    redprotect_not_allowed: "&dCMP &5\u00BB&c You are not allowed to edit blocks in region &d"{NAME}"&c (created by &d{CREATOR}&c)"
+    redprotect_not_allowed: "&dCMP &5\u00BB&c You are not allowed to edit blocks in region &d\"{NAME}\"&c (created by &d{CREATOR}&c)"
 
     # Tokens: {NAME}, {OWNER}
-    plotme_not_allowed: "&dCMP &5\u00BB&c You are not allowed to edit blocks in plot &d"{NAME}"&c (owned by &d{OWNER}&c)"
+    plotme_not_allowed: "&dCMP &5\u00BB&c You are not allowed to edit blocks in plot &d\"{NAME}\"&c (owned by &d{OWNER}&c)"
 
 
 # Don't change this! You'll break stuff!
