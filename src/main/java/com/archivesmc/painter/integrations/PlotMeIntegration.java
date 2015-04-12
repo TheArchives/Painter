@@ -2,6 +2,7 @@ package com.archivesmc.painter.integrations;
 
 import com.archivesmc.painter.Painter;
 import com.worldcretornica.plotme_core.Plot;
+import com.worldcretornica.plotme_core.PlotId;
 import com.worldcretornica.plotme_core.PlotMeCoreManager;
 import com.worldcretornica.plotme_core.api.ILocation;
 import com.worldcretornica.plotme_core.bukkit.api.BukkitLocation;
@@ -25,9 +26,16 @@ public class PlotMeIntegration implements Integration {
         // This API is pretty silly
         PlotMeCoreManager manager = PlotMeCoreManager.getInstance();
         ILocation location = new BukkitLocation(block.getLocation());
-        Plot plot = manager.getPlotById(manager.getPlotId(location), new BukkitWorld(block.getWorld()));
+        PlotId plotId = manager.getPlotId(location);
 
-        return plot.isAllowed(player.getUniqueId());
+        if (plotId == null) {
+            return false; // For now
+        }
+
+        Plot plot = manager.getPlotById(plotId, new BukkitWorld(block.getWorld()));
+
+        return plot != null && plot.isAllowed(player.getUniqueId());
+
     }
 
     @Override

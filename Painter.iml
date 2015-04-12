@@ -15,20 +15,16 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="Gradle: de.diddiz:logblock:dev-SNAPSHOT" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: com.archivesmc.archblock:ArchBlock:0.1.0b" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.sk89q:worldedit:6.0.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: net.milkbowl.vault:VaultAPI:1.5" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: de.schlichtherle:truezip:6.8.3" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: rhino:js:1.7R2" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.google.code.findbugs:jsr305:1.3.9" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.sk89q.worldedit:worldedit-bukkit:6.0.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.sk89q:worldguard:6.0.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: com.mewin:WGCustomFlags:1.8.1-beta" level="project" />
     <orderEntry type="library" exported="" name="Gradle: mysql:mysql-connector-java:5.1.34" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.hibernate:hibernate-core:4.2.5.Final" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.hibernate:hibernate-c3p0:4.2.5.Final" level="project" />
     <orderEntry type="library" exported="" name="Gradle: commons-io:commons-io:2.4" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: com.intellij:annotations:12.0" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: de.schlichtherle:truezip:6.8.3" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: rhino:js:1.7R2" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: com.google.code.findbugs:jsr305:1.3.9" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.sk89q.worldedit:worldedit-core:6.0.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.sk89q.bukkit:bukkit-classloader-check:1.7.2-R0.3" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.sk89q:dummypermscompat:1.7" level="project" />
@@ -49,7 +45,6 @@
     <orderEntry type="library" exported="" name="Gradle: com.sk89q:jchronic:0.2.4a" level="project" />
     <orderEntry type="library" exported="" name="Gradle: net.sf.opencsv:opencsv:2.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.mchange:mchange-commons-java:0.2.3.4" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.bukkit:bukkit:1.8-R0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.google.guava:guava:17.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: commons-lang:commons-lang:2.6" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.googlecode.json-simple:json-simple:1.1.1" level="project" />
@@ -59,11 +54,14 @@
     <orderEntry type="library" exported="" name="Gradle: junit:junit:4.10" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.hamcrest:hamcrest-core:1.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: me.botsko:prism:2.0.4" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.archivesmc.archblock:ArchBlock:0.1.0b" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: net.milkbowl.vault:VaultAPI:1.5" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.mewin:WGCustomFlags:1.8.1-beta" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.intellij:annotations:12.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.bukkit:bukkit:1.8-R0.1-SNAPSHOT" level="project" />
     <orderEntry type="module-library" exported="">
       <library name="Gradle: CoreProtect">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/CoreProtect.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/CoreProtect.jar!/" />
           <root url="jar://$MODULE_DIR$/lib/CoreProtect.jar!/" />
         </CLASSES>
         <JAVADOC />
@@ -74,8 +72,6 @@
       <library name="Gradle: HawkEye">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/HawkEye.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/HawkEye.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/HawkEye.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -84,7 +80,6 @@
     <orderEntry type="module-library" exported="">
       <library name="Gradle: RedProtect">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/RedProtect.jar!/" />
           <root url="jar://$MODULE_DIR$/lib/RedProtect.jar!/" />
         </CLASSES>
         <JAVADOC />

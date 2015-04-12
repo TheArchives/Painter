@@ -21,6 +21,10 @@ public class RedProtectIntegration implements Integration {
     public boolean canEdit(final Block block, final Player player) {
         Region region = RedProtectAPI.getRegion(block.getLocation());
 
+        if (region == null) {
+            return true;
+        }
+
         return region.canBuild(player);
     }
 
