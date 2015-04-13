@@ -49,7 +49,6 @@ public class PlotMeIntegration implements Integration {
 
         // On the road also
         return plot != null && plot.isAllowed(player.getUniqueId());
-
     }
 
     @Override
@@ -69,8 +68,21 @@ public class PlotMeIntegration implements Integration {
     public void notifyNotAllowed(final Block block, final Player player) {
         // This API is pretty silly
         PlotMeCoreManager manager = PlotMeCoreManager.getInstance();
+
         ILocation location = new BukkitLocation(block.getLocation());
-        Plot plot = manager.getPlotById(manager.getPlotId(location), new BukkitWorld(block.getWorld()));
+        PlotId plotId = manager.getPlotId(location);
+
+        if (plotId == null) {
+            // On the road
+            return;
+        }
+
+        Plot plot = manager.getPlotById(plotId, new BukkitWorld(block.getWorld()));
+
+        if (plot == null) {
+            // On the road
+            return;
+        }
 
         Map<String, String> args = new HashMap<>();
 
