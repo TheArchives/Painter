@@ -5,6 +5,7 @@ import com.worldcretornica.plotme_core.Plot;
 import com.worldcretornica.plotme_core.PlotId;
 import com.worldcretornica.plotme_core.PlotMeCoreManager;
 import com.worldcretornica.plotme_core.api.ILocation;
+import com.worldcretornica.plotme_core.bukkit.api.BukkitBlock;
 import com.worldcretornica.plotme_core.bukkit.api.BukkitLocation;
 import com.worldcretornica.plotme_core.bukkit.api.BukkitWorld;
 import org.bukkit.block.Block;
@@ -25,15 +26,28 @@ public class PlotMeIntegration implements Integration {
     public boolean canEdit(final Block block, final Player player) {
         // This API is pretty silly
         PlotMeCoreManager manager = PlotMeCoreManager.getInstance();
+
+        if (! manager.isPlotWorld(new BukkitBlock(block))) {
+            // Not a plot world
+            return true;
+        }
+
+        if (player.hasPermission("plotme.admin.buildanywhere")) {
+            // Allowed to build anywhere
+            return true;
+        }
+
         ILocation location = new BukkitLocation(block.getLocation());
         PlotId plotId = manager.getPlotId(location);
 
         if (plotId == null) {
-            return false; // For now
+            // On the road
+            return false;
         }
 
         Plot plot = manager.getPlotById(plotId, new BukkitWorld(block.getWorld()));
 
+        // On the road also
         return plot != null && plot.isAllowed(player.getUniqueId());
 
     }
