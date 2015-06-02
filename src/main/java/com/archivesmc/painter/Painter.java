@@ -252,7 +252,7 @@ public class Painter extends JavaPlugin {
      * <p>
      *
      * <code>
-     *     Map<String, String> args = new HashMap<>();<br/>
+     *     Map&lt;String, String&gt; args = new HashMap&lt;&gt;();<br>
      *     args.put("PERMISSION", "my.awesome.permission");
      * </code>
      *
