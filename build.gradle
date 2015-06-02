@@ -151,6 +151,8 @@ dependencies {
     compile 'org.bukkit:bukkit:1.7.9-R0.2'
     compile 'com.archivesmc.archblock:ArchBlock:0.1.0b'
     compile "com.sk89q:worldguard:6.0.0-SNAPSHOT"
+    compile 'uk.co.oliwali:HawkEye:1.6.0'
+    compile 'com.archivesmc.archblock:ArchBlock:0.1.1'
 
     compile files('lib/CoreProtect.jar')
     compile files('lib/HawkEye.jar')
