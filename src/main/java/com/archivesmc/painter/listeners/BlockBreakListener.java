@@ -69,6 +69,24 @@ public class BlockBreakListener implements Listener {
                     if (heldColorable.getColor() == blockColorable.getColor()) {
                         return;
                     }
+                } else if (heldMat == Material.LOG && block.getType() == Material.LOG) {
+                    if (block.getData() == items.getData().getData()) {
+                        return;
+                    }
+
+                    block.setData(items.getData().getData());
+                } else if (heldMat == Material.LOG_2 && block.getType() == Material.LOG_2) {
+                    if (block.getData() == items.getData().getData()) {
+                        return;
+                    }
+
+                    block.setData(items.getData().getData());
+                } else if (heldMat == Material.WOOD && block.getType() == Material.WOOD) {
+                    if (block.getData() == items.getData().getData()) {
+                        return;
+                    }
+
+                    block.setData(items.getData().getData());
                 } else if (heldMat == Material.COBBLESTONE && block.getType() == Material.COBBLESTONE) {
                     if (block.getData() == items.getData().getData()) {
                         return;
