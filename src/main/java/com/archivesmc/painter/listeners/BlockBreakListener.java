@@ -69,45 +69,36 @@ public class BlockBreakListener implements Listener {
                     if (heldColorable.getColor() == blockColorable.getColor()) {
                         return;
                     }
+                } else if (heldMat == Material.COBBLESTONE && block.getType() == Material.COBBLESTONE) {
+                    if (block.getData() == items.getData().getData()) {
+                        return;
+                    }
+
+                    block.setData(items.getData().getData());
+                } else if (heldMat == Material.STONE && block.getType() == Material.STONE) {
+                    if (block.getData() == items.getData().getData()) {
+                        return;
+                    }
+
+                    block.setData(items.getData().getData());
                 } else if (heldMat == Material.STAINED_CLAY && block.getType() == Material.STAINED_CLAY) {
                     if (block.getData() == items.getData().getData()) {
                         return;
                     }
 
                     block.setData(items.getData().getData());
-
-//                    heldColorable = (Colorable) items.getData();
-//                    blockColorable = (Colorable) block.getState().getData();
-//
-//                    if (heldColorable.getColor() == blockColorable.getColor()) {
-//                        return;
-//                    }
                 } else if (heldMat == Material.STAINED_GLASS && block.getType() == Material.STAINED_GLASS) {
                     if (block.getData() == items.getData().getData()) {
                         return;
                     }
 
                     block.setData(items.getData().getData());
-
-//                    heldColorable = (Colorable) items.getData();
-//                    blockColorable = (Colorable) block.getState().getData();
-//
-//                    if (heldColorable.getColor() == blockColorable.getColor()) {
-//                        return;
-//                    }
                 } else if (heldMat == Material.STAINED_GLASS_PANE && block.getType() == Material.STAINED_GLASS_PANE) {
                     if (block.getData() == items.getData().getData()) {
                         return;
                     }
 
                     block.setData(items.getData().getData());
-
-//                    heldColorable = (Colorable) items.getData();
-//                    blockColorable = (Colorable) block.getState().getData();
-//
-//                    if (heldColorable.getColor() == blockColorable.getColor()) {
-//                        return;
-//                    }
                 } else if (event.getBlock().getType() == heldMat) {
                     return;
                 }
