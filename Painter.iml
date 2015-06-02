@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id="Painter" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" external.system.module.group="com.archivesmc.painter" external.system.module.version="0.0.3_2" type="JAVA_MODULE" version="4">
+<module external.linked.project.id="Painter" external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" external.system.module.group="com.archivesmc.painter" external.system.module.version="0.0.4" type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/build/classes/main" />
     <output-test url="file://$MODULE_DIR$/build/classes/test" />
@@ -60,5 +60,42 @@
     <orderEntry type="library" exported="" name="Gradle: com.archivesmc.archblock:ArchBlock:0.1.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.bukkit:bukkit:1.8.6-R0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.yaml:snakeyaml:1.15" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: me.botsko:prism:2.0.4" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library name="Gradle: CoreProtect">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/CoreProtect.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="Gradle: HawkEye">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/HawkEye.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="Gradle: RedProtect">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/RedProtect.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library name="Gradle: PlotMe-Core">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/PlotMe-Core.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
