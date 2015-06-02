@@ -164,3 +164,8 @@ dependencies {
     compile files('lib/RedProtect.jar')
     compile files('lib/PlotMe-Core.jar')
 }
+
+javadoc {
+    // Apparently this fixes things
+    options.addStringOption("sourcepath", "")
+}
