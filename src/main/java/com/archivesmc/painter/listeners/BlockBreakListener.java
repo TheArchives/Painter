@@ -69,7 +69,7 @@ public class BlockBreakListener implements Listener {
                     if (heldColorable.getColor() == blockColorable.getColor()) {
                         return;
                     }
-                } else if (heldMat == Material.STAINED_CLAY && block.getType() == Material.STAINED_CLAY) {
+                } /*else if (heldMat == Material.STAINED_CLAY && block.getType() == Material.STAINED_CLAY) {
                     heldColorable = (Colorable) items.getData();
                     blockColorable = (Colorable) block.getState().getData();
 
@@ -90,7 +90,7 @@ public class BlockBreakListener implements Listener {
                     if (heldColorable.getColor() == blockColorable.getColor()) {
                         return;
                     }
-                } else if (event.getBlock().getType() == heldMat) {
+                }*/ else if (event.getBlock().getType() == heldMat) {
                     return;
                 }
 
