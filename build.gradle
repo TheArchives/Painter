@@ -140,14 +140,14 @@ download {
 // Download RedProtect
 
 download {
-    src 'http://dev.bukkit.org/media/files/871/297/RedProtect.jar'
+    src 'http://dev.bukkit.org/media/files/882/505/RedProtect.jar'
     dest 'lib/RedProtect.jar'
 }
 
 // Download PlotMe. These guys have no idea how maven repos should be done, apparently.
 
 download {
-    src 'http://ci.worldcretornica.com:8080/job/PlotMe-Core/137/artifact/target/PlotMe-Core.jar'
+    src 'http://ci.worldcretornica.com:8080/job/PlotMe-Core/200/artifact/target/PlotMe-Core.jar'
     dest 'lib/PlotMe-Core.jar'
 }
 

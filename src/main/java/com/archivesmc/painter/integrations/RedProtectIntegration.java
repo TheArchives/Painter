@@ -1,7 +1,7 @@
 package com.archivesmc.painter.integrations;
 
-import com.OverCaste.plugin.RedProtect.API.RedProtectAPI;
-import com.OverCaste.plugin.RedProtect.Region;
+import br.net.fabiozumbi12.RedProtect.API.RedProtectAPI;
+import br.net.fabiozumbi12.RedProtect.Region;
 import com.archivesmc.painter.Painter;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -21,11 +21,7 @@ public class RedProtectIntegration implements Integration {
     public boolean canEdit(final Block block, final Player player) {
         Region region = RedProtectAPI.getRegion(block.getLocation());
 
-        if (region == null) {
-            return true;
-        }
-
-        return region.canBuild(player);
+        return region == null || region.canBuild(player);
     }
 
     @Override

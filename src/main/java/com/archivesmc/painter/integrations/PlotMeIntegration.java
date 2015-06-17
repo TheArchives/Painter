@@ -4,9 +4,8 @@ import com.archivesmc.painter.Painter;
 import com.worldcretornica.plotme_core.Plot;
 import com.worldcretornica.plotme_core.PlotId;
 import com.worldcretornica.plotme_core.PlotMeCoreManager;
-import com.worldcretornica.plotme_core.api.ILocation;
-import com.worldcretornica.plotme_core.bukkit.api.BukkitBlock;
-import com.worldcretornica.plotme_core.bukkit.api.BukkitLocation;
+import com.worldcretornica.plotme_core.api.Location;
+import com.worldcretornica.plotme_core.api.Vector;
 import com.worldcretornica.plotme_core.bukkit.api.BukkitWorld;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -27,7 +26,7 @@ public class PlotMeIntegration implements Integration {
         // This API is pretty silly
         PlotMeCoreManager manager = PlotMeCoreManager.getInstance();
 
-        if (! manager.isPlotWorld(new BukkitBlock(block))) {
+        if (! manager.isPlotWorld(new BukkitWorld(block.getWorld()))) {
             // Not a plot world
             return true;
         }
@@ -37,7 +36,7 @@ public class PlotMeIntegration implements Integration {
             return true;
         }
 
-        ILocation location = new BukkitLocation(block.getLocation());
+        Location location = new Location(new BukkitWorld(block.getWorld()), new Vector(block.getX(), block.getY(), block.getZ()));
         PlotId plotId = manager.getPlotId(location);
 
         if (plotId == null) {
@@ -69,7 +68,7 @@ public class PlotMeIntegration implements Integration {
         // This API is pretty silly
         PlotMeCoreManager manager = PlotMeCoreManager.getInstance();
 
-        ILocation location = new BukkitLocation(block.getLocation());
+        Location location = new Location(new BukkitWorld(block.getWorld()), new Vector(block.getX(), block.getY(), block.getZ()));
         PlotId plotId = manager.getPlotId(location);
 
         if (plotId == null) {
