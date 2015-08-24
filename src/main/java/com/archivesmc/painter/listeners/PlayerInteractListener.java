@@ -13,6 +13,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 /**
@@ -56,7 +57,7 @@ public class PlayerInteractListener implements Listener {
             Material heldMat = items.getType();
 
             if (heldMat.isBlock()) {
-                Block block = player.getTargetBlock(null, 100);
+                Block block = player.getTargetBlock((HashSet<Byte>) null, 100);
 
                 if (! this.plugin.canEdit(block, player)) {
                     event.setCancelled(true);

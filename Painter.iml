@@ -55,7 +55,6 @@
     <orderEntry type="library" exported="" name="Gradle: junit:junit:4.10" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.hamcrest:hamcrest-core:1.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.archivesmc.archblock:ArchBlock:0.1.1" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.bukkit:bukkit:1.8.6-R0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.yaml:snakeyaml:1.15" level="project" />
     <orderEntry type="library" exported="" name="Gradle: me.botsko:prism:2.0.4" level="project" />
     <orderEntry type="module-library" exported="">
@@ -98,14 +97,16 @@
     <orderEntry type="library" exported="" name="Gradle: org.apache.commons:commons-lang3:3.3.2" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.google.inject:guice:4.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.flowpowered:flow-noise:1.0.1-SNAPSHOT" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: com.flowpowered:flow-math:1.0.0" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: ninja.leaping.configurate:configurate-gson:1.2.2" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: ninja.leaping.configurate:configurate-hocon:1.2.2" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.ow2.asm:asm:5.0.3" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.slf4j:slf4j-api:1.7.12" level="project" />
     <orderEntry type="library" exported="" name="Gradle: javax.inject:javax.inject:1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: aopalliance:aopalliance:1.0" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: ninja.leaping.configurate:configurate-core:1.2.2" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.typesafe:config:1.2.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: ninja.leaping.configurate:configurate-hocon:2.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.flowpowered:flow-math:1.0.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: ninja.leaping.configurate:configurate-gson:2.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: ninja.leaping.configurate:configurate-yaml:2.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: ninja.leaping.configurate:configurate-core:2.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.bukkit:bukkit:1.8.8-R0.1-SNAPSHOT" level="project" />
   </component>
 </module>

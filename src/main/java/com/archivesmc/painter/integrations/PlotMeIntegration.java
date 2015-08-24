@@ -1,11 +1,14 @@
 package com.archivesmc.painter.integrations;
 
 import com.archivesmc.painter.Painter;
+import com.google.common.base.Optional;
+import com.worldcretornica.plotme_core.PermissionNames;
 import com.worldcretornica.plotme_core.Plot;
 import com.worldcretornica.plotme_core.PlotId;
 import com.worldcretornica.plotme_core.PlotMeCoreManager;
 import com.worldcretornica.plotme_core.api.Location;
 import com.worldcretornica.plotme_core.api.Vector;
+import com.worldcretornica.plotme_core.bukkit.PlotMe_CorePlugin;
 import com.worldcretornica.plotme_core.bukkit.api.BukkitWorld;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -25,9 +28,15 @@ public class PlotMeIntegration implements Integration {
     public boolean canEdit(final Block block, final Player player) {
         // This API is pretty silly
         PlotMeCoreManager manager = PlotMeCoreManager.getInstance();
+        PlotMe_CorePlugin plugin = (PlotMe_CorePlugin) this.plugin.getServer().getPluginManager().getPlugin("PlotMe");
 
         if (! manager.isPlotWorld(new BukkitWorld(block.getWorld()))) {
             // Not a plot world
+            return true;
+        }
+
+        if (player.hasPermission(PermissionNames.ADMIN_BUILDANYWHERE)) {
+            // They can build anywhere
             return true;
         }
 
@@ -46,8 +55,34 @@ public class PlotMeIntegration implements Integration {
 
         Plot plot = manager.getPlotById(plotId, new BukkitWorld(block.getWorld()));
 
-        // On the road also
-        return plot != null && plot.isAllowed(player.getUniqueId());
+        if (plot == null) {
+            // On the road also
+            return false;
+        }
+
+        // Next we need to emulate the checks PlotMe makes since the plotme api is heavily broken
+
+        if (plot.getOwnerId().equals(player.getUniqueId())) {
+            // They own the plot
+            return true;
+        }
+
+        Optional<Plot.AccessLevel> member = plot.isMember(player.getUniqueId());
+
+        if (member.isPresent()) {
+            // They're a member of the plot
+            if (member.get().equals(Plot.AccessLevel.TRUSTED) && !this.plugin.getServer().getOfflinePlayer(plot.getOwnerId()).isOnline()) {
+                // If they're a trusted member and the owner is offline.. Nope.
+                return false;
+            } else if (plugin.getAPI().isPlotLocked(plot.getId())) {
+                // Plot is locked.. Nope.
+                return false;
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     @Override

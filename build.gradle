@@ -147,14 +147,14 @@ download {
 // Download PlotMe. These guys have no idea how maven repos should be done, apparently.
 
 download {
-    src 'http://ci.worldcretornica.com:8080/job/PlotMe-Core/200/artifact/target/PlotMe-Core.jar'
+    src 'http://ci.worldcretornica.com/job/PlotMe-Core/lastSuccessfulBuild/artifact/target/PlotMe-Core.jar'
     dest 'lib/PlotMe-Core.jar'
 }
 
 dependencies {
     compile 'de.diddiz:logblock:dev-SNAPSHOT'
     compile 'me.botsko:prism:2.0.4'
-    compile 'org.bukkit:bukkit:1.7.9-R0.2'
+    compile 'org.bukkit:bukkit:1.8.8-R0.1-SNAPSHOT'
     compile 'com.archivesmc.archblock:ArchBlock:0.1.0b'
     compile "com.sk89q:worldguard:6.0.0-SNAPSHOT"
     compile 'com.archivesmc.archblock:ArchBlock:0.1.1'
